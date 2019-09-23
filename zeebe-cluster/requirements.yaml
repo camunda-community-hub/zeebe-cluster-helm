@@ -1,0 +1,9 @@
+dependencies:
+- name: elasticsearch
+  repository: http://helm.elastic.co 
+  version: 7.3.0
+- name: kibana
+  repository: http://helm.elastic.co 
+  version: 7.3.0
+  condition: "kibana.enabled"
+  

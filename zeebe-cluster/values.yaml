@@ -1,0 +1,41 @@
+# Default values for zeebe-cluster.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+elasticsearch:
+  imageTag: 6.8.1
+  replicas: 3
+kibana:
+  enabled: false
+  imageTag: 6.8.1
+
+replicaCount: 3
+JavaOpts: |
+  -XX:+UnlockExperimentalVMOptions
+  -XX:+UseCGroupMemoryLimitForHeap
+  -Xms1024m
+  -Xmx1024m
+image:
+  repository: camunda/zeebe
+  tag: 0.20.0
+  pullPolicy: IfNotPresent
+labels:
+  app: zeebe  
+service:
+  type: ClusterIP
+  http:
+    port: 9600
+  gateway:
+    port: 26500
+  command:
+    port: 26501  
+  internal:
+    port: 26502
+resources: 
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+
