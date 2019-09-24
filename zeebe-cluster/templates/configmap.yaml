@@ -29,7 +29,7 @@ data:
     id = "elasticsearch"
     className = "io.zeebe.exporter.ElasticsearchExporter"
       [exporters.args]
-      url = "{{ .Values.global.zeebe.elasticsearch.url }}"
+      url = "http://{{ .Values.global.elasticsearch.host }}:{{ .Values.global.elasticsearch.port }}"
 
       [exporters.args.bulk]
       delay = 5
