@@ -14,7 +14,7 @@ This functionality is in beta and is subject to change. The design and code is l
 
 ## Installing
 
-* Add the elastic helm charts repo
+* Add the official zeebe helm charts repo
   ```
   helm repo add zeebe https://helm.zeebe.io
   ```

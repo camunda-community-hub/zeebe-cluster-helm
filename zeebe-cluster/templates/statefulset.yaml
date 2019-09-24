@@ -22,7 +22,6 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         app: zeebe
     spec:
-      terminationGracePeriodSeconds: 10
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
