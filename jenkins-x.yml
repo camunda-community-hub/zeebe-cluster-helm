@@ -1,1 +1,7 @@
-buildPack: charts
+buildPack: charts 
+pipelineConfig:
+  pipelines:
+    release:
+      promote:
+        steps:
+        - command: jx step create pr chart --name zeebe-cluster --version $VERSION  --repo https://github.com/zeebe-io/zeebe-full-helm.git 
