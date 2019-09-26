@@ -4,4 +4,5 @@ pipelineConfig:
     release:
       promote:
         steps:
-        - command: jx step create pr chart --name zeebe-cluster --version $VERSION  --repo http://github.com/zeebe-io/zeebe-full-helm 
+        - command: jx step syntax effective
+        - command: jx step create pr chart --name zeebe-cluster --version $VERSION  --repo https://github.com/zeebe-io/zeebe-full-helm.git 
