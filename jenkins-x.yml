@@ -1,8 +1,17 @@
 buildPack: charts 
+env:
+  - name: GIT_COMMITTER_EMAIL
+    value: jenkins-x@googlegroups.com
+  - name: GIT_AUTHOR_EMAIL
+    value: jenkins-x@googlegroups.com
+  - name: GIT_AUTHOR_NAME
+    value: jenkins-x-bot
+  - name: GIT_COMMITTER_NAME
+    value: jenkins-x-bot
 pipelineConfig:
   pipelines:
     release:
       promote:
-        steps:
+        steps:          
         - command: jx step syntax effective
         - command: jx step create pr chart --name zeebe-cluster --version $VERSION  --repo https://github.com/zeebe-io/zeebe-full-helm.git 
