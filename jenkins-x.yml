@@ -1,5 +1,6 @@
 buildPack: charts 
-env:
+pipelineConfig:
+  env:
   - name: GIT_COMMITTER_EMAIL
     value: jenkins-x@googlegroups.com
   - name: GIT_AUTHOR_EMAIL
@@ -8,7 +9,6 @@ env:
     value: jenkins-x-bot
   - name: GIT_COMMITTER_NAME
     value: jenkins-x-bot
-pipelineConfig:
   pipelines:
     release:
       promote:
