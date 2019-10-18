@@ -50,7 +50,7 @@ JavaOpts: |
   -Xmx1024m
 image:
   repository: camunda/zeebe
-  tag: 0.20.0
+  tag: 0.21.1
   pullPolicy: IfNotPresent
 labels:
   app: zeebe  
