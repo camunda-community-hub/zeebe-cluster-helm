@@ -5,7 +5,7 @@ metadata:
   labels:
 {{- toYaml  .Values.labels | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.zeebe.cluster.size }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
@@ -30,11 +30,11 @@ spec:
         - name: ZEEBE_LOG_LEVEL
           value: debug
         - name: ZEEBE_PARTITIONS_COUNT
-          value: "3"
+          value: "{{ .Values.zeebe.partition.count }}"
         - name: ZEEBE_CLUSTER_SIZE
-          value: "3"
+          value: "{{ .Values.zeebe.cluster.size }}"
         - name: ZEEBE_REPLICATION_FACTOR
-          value: "3"
+          value: "{{ .Values.zeebe.replication.factor }}"
         - name: JAVA_TOOL_OPTIONS
           value: 
            {{- toYaml .Values.JavaOpts | nindent 12}}
