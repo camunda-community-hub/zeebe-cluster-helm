@@ -30,11 +30,11 @@ spec:
         - name: ZEEBE_LOG_LEVEL
           value: debug
         - name: ZEEBE_PARTITIONS_COUNT
-          value: "{{ default .Values.zeebe.partition.count 3 }}"
+          value: "{{ .Values.zeebe.partition.count | default 3 }}"
         - name: ZEEBE_CLUSTER_SIZE
-          value: "{{ default .Values.zeebe.cluster.size 3 }}"
+          value: "{{ .Values.zeebe.cluster.size | default 3 }}"
         - name: ZEEBE_REPLICATION_FACTOR
-          value: "{{ default .Values.zeebe.replication.factor 3 }}"
+          value: "{{ .Values.zeebe.replication.factor | default 3 }}"
         - name: JAVA_TOOL_OPTIONS
           value: 
            {{- toYaml .Values.JavaOpts | nindent 12}}
