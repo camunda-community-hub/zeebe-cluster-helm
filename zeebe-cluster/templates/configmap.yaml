@@ -23,8 +23,8 @@ data:
   zeebe.cfg.toml: |
     # For more information about this configuration visit: https://docs.zeebe.io/operations/the-zeebecfgtoml-file.html
     [threads]
-    cpuThreadCount = {{ .Values.zeebe.cpu.thread.count | quote }}
-    ioThreadCount = {{ .Values.zeebe.io.thread.count | quote }}
+    cpuThreadCount = {{ .Values.cpuThreadCount | quote }}
+    ioThreadCount = {{ .Values.ioThreadCount | quote }}
     [[exporters]]
     id = "elasticsearch"
     className = "io.zeebe.exporter.ElasticsearchExporter"
