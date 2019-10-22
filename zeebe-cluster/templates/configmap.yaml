@@ -24,9 +24,9 @@ data:
     # For more information about this configuration visit: https://docs.zeebe.io/operations/the-zeebecfgtoml-file.html
     [threads]
     cpuThreadCount = "{{ .Values.zeebe.cpu.thread.count }}"
-    {{ if .Values.zeebe.io.thread.count }}
+    {{- if and (.Values.zeebe.io) (.Values.zeebe.io.thread) (.Values.zeebe.io.thread.count) }}
     ioThreadCount = "{{ .Values.zeebe.io.thread.count }}"
-    {{ end }}
+    {{- end }}
     [[exporters]]
     id = "elasticsearch"
     className = "io.zeebe.exporter.ElasticsearchExporter"
