@@ -2,6 +2,20 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+zeebe:
+  partition:
+    count: "3"
+  cluster: 
+    size: "3"
+  replication:
+    factor: "3"
+  cpu:
+    thread:
+      count: "2"
+  io:
+    thread:
+      count: "2"
+      
 elasticsearch:
   enabled: true
   imageTag: 6.8.1
@@ -9,7 +23,6 @@ kibana:
   enabled: false
   imageTag: 6.8.1
 
-replicaCount: 3
 JavaOpts: |
   -XX:+UseParallelGC 
   -XX:MinHeapFreeRatio=5
