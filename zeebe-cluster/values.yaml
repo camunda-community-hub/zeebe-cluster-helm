@@ -37,6 +37,15 @@ resources:  {} # Configure resources as per your need
   #  cpu: 1000m
   #  memory: 2Gi
 
+data:
+  enabled: true
+  volumeClaimTemplate:
+    accessModes: [ "ReadWriteOnce" ]
+    storageClassName: gp2
+    resources:
+      requests:
+        storage: 5Gi
+        
 configs:
   startup.sh: |
     #!/bin/bash -xeu
