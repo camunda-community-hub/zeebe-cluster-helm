@@ -29,13 +29,13 @@ service:
     port: 26501  
   internal:
     port: 26502
-resources: 
-  requests:
-    cpu: 500m
-    memory: 1Gi
-  limits:
-    cpu: 1000m
-    memory: 2Gi
+resources:  {} # Configure resources as per your need
+  #requests:
+  #  cpu: 500m
+  #  memory: 1Gi
+  #limits:
+  #  cpu: 1000m
+  #  memory: 2Gi
 
 configs:
   startup.sh: |
@@ -58,41 +58,41 @@ configs:
   zeebe.cfg.toml: |
     # For more information about this configuration visit: https://docs.zeebe.io/operations/the-zeebecfgtoml-file.html
     [threads]
-    cpuThreadCount = {{ .Values.cpuThreadCount | quote }}
-    ioThreadCount = {{ .Values.ioThreadCount | quote }}
+    cpuThreadCount = 1
+    ioThreadCount = 1
     [[exporters]]
-    id = "elasticsearch"
-    className = "io.zeebe.exporter.ElasticsearchExporter"
-      [exporters.args]
-      url = "http://{{ .Values.global.elasticsearch.host }}:{{ .Values.global.elasticsearch.port }}"
-
-      [exporters.args.bulk]
-      delay = 5
-      size = 1_000
-
-      #[exporters.args.authentication]
-      #username = elastic
-      #password = changeme
-
-      [exporters.args.index]
-      prefix = "zeebe-record"
-      createTemplate = true
-
-      command = false
-      event = true
-      rejection = false
-
-      deployment = true
-      incident = true
-      job = true
-      message = false
-      messageSubscription = false
-      raft = false
-      workflowInstance = true
-      workflowInstanceSubscription = false
+    #id = "elasticsearch"
+    #className = "io.zeebe.exporter.ElasticsearchExporter"
+    #  [exporters.args]
+    #  url = "http://elasticsearch-master:9200"
+    #
+    #  [exporters.args.bulk]
+    #  delay = 5
+    #  size = 1_000
+    #
+    #  #[exporters.args.authentication]
+    #  #username = elastic
+    #  #password = changeme
+    #
+    #  [exporters.args.index]
+    #  prefix = "zeebe-record"
+    #  createTemplate = true
+    #
+    #  command = false
+    #  event = true
+    #  rejection = false
+    #
+    #  deployment = true
+    #  incident = true
+    #  job = true
+    #  message = false
+    #  messageSubscription = false
+    #  raft = false
+    #  workflowInstance = true
+    #  workflowInstanceSubscription = false
 
 elasticsearch:
-  enabled: true
+  enabled: false
   imageTag: 6.8.1
   host: "elasticsearch-master"
   port: 9200
