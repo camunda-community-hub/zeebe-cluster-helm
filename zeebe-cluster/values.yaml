@@ -39,7 +39,7 @@ resources:  {}
 #     memory: 2Gi
 
 data:
-  enabled: false
+  enabled: true
   volumeClaimTemplate:
     accessModes: [ "ReadWriteOnce" ]
     storageClassName: gp2
