@@ -43,3 +43,7 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
+
+{{- define "zeebe-cluster.version" -}}
+{{- printf "%s:%s" .Values.image.repositoruy .Values.image.tag -}}
+{{- end -}}
