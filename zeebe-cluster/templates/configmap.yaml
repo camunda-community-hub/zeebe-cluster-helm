@@ -3,10 +3,11 @@ metadata:
   name: {{ include "zeebe-cluster.fullname" . }}
 apiVersion: v1
 data:
-{{- if .Values.configs."startup.sh" }}
-  startup.sh: {{ .Values.configs."startup.sh" }}
+{{- if .Values.startupScript }}
+  startup.sh: |-
+{{ .Values.startupScript | nindent 4 }}
 {{- else }}
-  startup.sh: |
+  startup.sh: |-
     #!/bin/bash -xeu
 
     configFile=/usr/local/zeebe/conf/zeebe.cfg.toml
@@ -24,10 +25,11 @@ data:
     
     exec /usr/local/zeebe/bin/broker
  {{- end }}
- {{- if .Values.configs."zeebe.cfg.toml" }}
-  zeebe.cfg.toml: {{ .Values.configs."zeebe.cfg.toml" }}
+ {{- if .Values.zeebeConfig }}
+  zeebe.cfg.toml: |-
+{{ .Values.zeebeConfig | nindent 4 }}
  {{- else }}
-  zeebe.cfg.toml: |
+  zeebe.cfg.toml: |-
     # For more information about this configuration visit: https://docs.zeebe.io/operations/the-zeebecfgtoml-file.html
     [threads]
     cpuThreadCount = 1
