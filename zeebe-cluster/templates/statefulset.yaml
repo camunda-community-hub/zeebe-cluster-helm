@@ -62,18 +62,19 @@ spec:
         - name: config
           mountPath: /usr/local/bin/startup.sh
           subPath: startup.sh
+{{- if .Values.data.enabled }}
         - name: data
           mountPath: /usr/local/zeebe/data
+{{- end }}
       volumes:
       - name: config
         configMap:
           name: {{ include "zeebe-cluster.fullname" . }}
           defaultMode: 0744
+{{- if .Values.data.enabled }}
   volumeClaimTemplates:
   - metadata:
       name: data
     spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 5Gi
+{{ toYaml .Values.data.volumeClaimTemplate | indent 8 }}
+{{- end }}
