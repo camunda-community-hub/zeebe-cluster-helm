@@ -42,7 +42,7 @@ data:
   enabled: true
   volumeClaimTemplate:
     accessModes: [ "ReadWriteOnce" ]
-    storageClassName: gp2
+    storageClassName: "standard"
     resources:
       requests:
         storage: 5Gi
