@@ -1,6 +1,6 @@
 kind: ConfigMap
 metadata:
-  name: {{ include "zeebe-cluster.fullname" . }}
+  name: {{ .Values.global.zeebe }}-configmap
 apiVersion: v1
 data:
   startup.sh: |

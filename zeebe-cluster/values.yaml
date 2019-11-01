@@ -1,9 +1,10 @@
 # Default values for zeebe-cluster.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-
-partitionCount: "3"
+global:
+  zeebe: "{{ .Release.Name }}-zeebe"
 clusterSize: "3"
+partitionCount: "3"
 replicationFactor: "3"
 cpuThreadCount: "2"
 ioThreadCount: "2"
