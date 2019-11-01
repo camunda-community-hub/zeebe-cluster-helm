@@ -1,6 +1,6 @@
 kind: ConfigMap
 metadata:
-  name: {{ .Values.global.zeebe }}-configmap
+  name: {{ tpl .Values.global.zeebe . }}-configmap
 apiVersion: v1
 data:
   startup.sh: |

@@ -7,13 +7,13 @@
 ({{ .Chart.Name }} - {{ .Chart.Version }})
 
 - Docker Image used for Broker: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-- Cluster Name: {{ .Values.global.zeebe }}
+- Cluster Name: {{ tpl .Values.global.zeebe . }}
 - ElasticSearch Enabled: {{ .Values.elasticsearch.enabled }} - URL: http://{{ .Values.global.elasticsearch.host }}:{{ .Values.global.elasticsearch.port }}
 - Kibana Enabled: {{ .Values.kibana.enabled }}
 
 The Cluster itself is not exposed as a service that means that you can use kubectl port-forward to access the Zeebe cluster from outside Kubernetes:
 
-> kubectl port-forward svc/{{ .Values.global.zeebe }} 26500:26500
+> kubectl port-forward svc/{{ tpl .Values.global.zeebe . }} 26500:26500
 
 Now you can connect your workers and clients to `localhost:26500`
 
