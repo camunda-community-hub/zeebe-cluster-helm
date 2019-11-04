@@ -20,7 +20,7 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-        app: zeebe
+        app: {{ tpl .Values.global.zeebe . | quote }}
     spec:
       containers:
       - name: {{ .Chart.Name }}
