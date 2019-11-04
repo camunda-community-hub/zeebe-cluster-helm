@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.global.zeebe }}
+  name: {{ .Values.global.zeebe | quote }}
   labels:
 {{- toYaml  .Values.labels | nindent 4 }}
 spec:
@@ -10,8 +10,8 @@ spec:
     matchLabels:
       app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
-      app: {{ .Values.global.zeebe }}
-  serviceName: {{ .Values.global.zeebe }}
+      app: {{ .Values.global.zeebe | quote }}
+  serviceName: {{ .Values.global.zeebe | quote }}
   updateStrategy:
     type: RollingUpdate
   podManagementPolicy: Parallel
@@ -67,7 +67,7 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: {{ .Values.global.zeebe }}
+          name: {{ .Values.global.zeebe | quote }}
           defaultMode: 0744
   volumeClaimTemplates:
   - metadata:
