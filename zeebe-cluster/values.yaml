@@ -1,8 +1,13 @@
 # Default values for zeebe-cluster.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-global:
+
+global: 
+  elasticsearch:
+    host: "elasticsearch-master"
+    port: 9200 
   zeebe: "{{ .Release.Name }}-zeebe"
+
 clusterSize: "3"
 partitionCount: "3"
 replicationFactor: "3"
@@ -46,7 +51,3 @@ resources:
   limits:
     cpu: 1000m
     memory: 2Gi
-global: 
-  elasticsearch:
-    host: "elasticsearch-master"
-    port: 9200 
