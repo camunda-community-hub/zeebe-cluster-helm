@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: {{ tpl .Values.global.zeebe . | quote }}
   labels:
+    app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: {{ tpl .Values.global.zeebe . | quote }}
 {{- toYaml  .Values.labels | nindent 4 }}
 spec:
   clusterIP: None
