@@ -30,7 +30,7 @@ JavaOpts: |
   -XX:+PrintFlagsFinal
 image:
   repository: camunda/zeebe
-  tag: 0.21.1
+  tag: 0.22.0-alpha2
   pullPolicy: IfNotPresent
 labels:
   app: zeebe  
