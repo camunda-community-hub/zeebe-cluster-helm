@@ -50,12 +50,21 @@ spec:
           name: command
         - containerPort: 26502
           name: internal
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.probePath }}
+            port: {{ .Values.service.http }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
         readinessProbe:
           httpGet:
-            path: /ready
-            port: http
-          initialDelaySeconds: 20
-          periodSeconds: 5
+            path: {{ .Values.probePath }}
+            port: {{ .Values.service.http }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
         volumeMounts:

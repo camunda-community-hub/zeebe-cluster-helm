@@ -52,3 +52,14 @@ resources:
   limits:
     cpu: 1000m
     memory: 2Gi
+probePath: /ready
+livenessProbe:
+  initialDelaySeconds: 20
+  periodSeconds: 5
+  successThreshold: 1
+  timeoutSeconds: 1
+readinessProbe:
+  failureThreshold: 1
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 1
