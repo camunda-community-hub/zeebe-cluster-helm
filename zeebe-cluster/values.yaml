@@ -54,7 +54,7 @@ resources:
     memory: 2Gi
 probePath: /ready
 livenessProbe:
-  initialDelaySeconds: 20
+  initialDelaySeconds: 45
   periodSeconds: 5
   successThreshold: 1
   timeoutSeconds: 1
