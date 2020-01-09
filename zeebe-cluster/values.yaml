@@ -58,6 +58,3 @@ readinessProbe:
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 1
-podSecurityContext:
-  fsGroup: 1000
-  runAsUser: 1000
