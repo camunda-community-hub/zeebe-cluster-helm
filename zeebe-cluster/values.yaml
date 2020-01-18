@@ -21,8 +21,9 @@ elasticsearch:
   imageTag: 6.8.5
 prometheus-operator:
   enabled: true
-  ingress:
-    enabled: true  
+  prometheus:
+    ingress:
+      enabled: true  
 kibana:
   enabled: false
   imageTag: 6.8.5
