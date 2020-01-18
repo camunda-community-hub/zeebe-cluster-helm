@@ -42,6 +42,7 @@ This functionality is in beta and is subject to change. The design and code is l
 This chart currently depends on the following charts: 
 - [ElasticSearch Helm Chart](https://github.com/elastic/helm-charts/blob/master/elasticsearch/README.md)
 - [Kibana Helm Chart](https://github.com/elastic/helm-charts/tree/master/kibana)
+- [Prometheus Operator Helm Chart](https://github.com/helm/charts/tree/master/stable/prometheus-operator)
 
 These dependencies can be turned on or off and parameters can be overriden from these dependent charts by changing the `values.yaml` file. For example:
 ```
