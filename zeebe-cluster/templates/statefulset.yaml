@@ -79,7 +79,8 @@ spec:
   - metadata:
       name: data
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes: {{ .Values.pvcAccessModes }}
+      storageClassName: {{ .Values.pvcStorageClassName }}
       resources:
         requests:
-          storage: 5Gi
+          storage: {{ .Values.pvcSize | quote }}
