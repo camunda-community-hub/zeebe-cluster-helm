@@ -18,8 +18,10 @@ pvcAccessModes: [ "ReadWriteOnce" ]
 
 elasticsearch:
   enabled: true
+  imageTag: 6.8.5
 kibana:
   enabled: false
+  imageTag: 6.8.5
 
 JavaOpts: |
   -XX:+UseParallelGC 
