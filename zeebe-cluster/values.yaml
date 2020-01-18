@@ -20,7 +20,10 @@ elasticsearch:
   enabled: true
   imageTag: 6.8.5
 prometheus:
-  enabled: true  
+  enabled: true
+  server:
+    ingress:
+      enabled: true  
 kibana:
   enabled: false
   imageTag: 6.8.5
