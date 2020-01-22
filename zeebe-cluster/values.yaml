@@ -19,7 +19,7 @@ pvcAccessModes: [ "ReadWriteOnce" ]
 elasticsearch:
   enabled: true
   imageTag: 6.8.5
-prometheus-operator:
+prometheusOperator:
   enabled: false
 kibana:
   enabled: false
