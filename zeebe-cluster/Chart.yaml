@@ -1,5 +1,4 @@
 apiVersion: v1
-appVersion: "1.0"
 description: Zeebe Cluster Helm Chart for Kubernetes
 name: zeebe-cluster
 version: 0.1.0-SNAPSHOT
