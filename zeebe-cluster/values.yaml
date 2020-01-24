@@ -13,6 +13,7 @@ partitionCount: "3"
 replicationFactor: "3"
 cpuThreadCount: "2"
 ioThreadCount: "2"
+zeebeCfg: null
 pvcSize: "10Gi"
 pvcAccessModes: [ "ReadWriteOnce" ]
 
@@ -67,3 +68,4 @@ readinessProbe:
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 1
+
