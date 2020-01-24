@@ -30,6 +30,8 @@ data:
     [threads]
     cpuThreadCount = {{ .Values.cpuThreadCount | quote }}
     ioThreadCount = {{ .Values.ioThreadCount | quote }}
+    [gateway.monitoring]
+    enabled = {{ .Values.gatewayMetrics | default false }}
     [[exporters]]
     id = "elasticsearch"
     className = "io.zeebe.exporter.ElasticsearchExporter"
