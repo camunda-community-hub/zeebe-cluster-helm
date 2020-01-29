@@ -13,7 +13,6 @@ partitionCount: "3"
 replicationFactor: "3"
 cpuThreadCount: "2"
 ioThreadCount: "2"
-gatewayMetrics: true
 pvcSize: "10Gi"
 pvcAccessModes: [ "ReadWriteOnce" ]
 
