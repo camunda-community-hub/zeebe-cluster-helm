@@ -43,7 +43,7 @@ image:
   tag: 0.22.1
   pullPolicy: IfNotPresent
 labels:
-  app: zeebe  
+  app: zeebe    
 service:
   type: ClusterIP
   http:
