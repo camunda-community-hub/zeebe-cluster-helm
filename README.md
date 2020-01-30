@@ -41,7 +41,7 @@ This functionality is in beta and is subject to change. The design and code is l
 | `pvcSize`                 | Set the Zeebe Cluster Persistence Volume Claim Request storage size                                                                                                                                | `10Gi`  
 | `pvcAccessModes`                 | Set the Zeebe Cluster Persistence Volume Claim Request accessModes                                                                                                                                | `[ "ReadWriteOnce" ]`  
 | `pvcStorageClassName`                 | Set the Zeebe Cluster Persistence Volume Claim Request storageClassName                                                                                                                                | ``  
-
+| `extraInitContainers`                 | add extra initContainers sections to StatefulSet                                                                                                                                | ``  
 ## Dependencies
 This chart currently depends on the following charts: 
 - [ElasticSearch Helm Chart](https://github.com/elastic/helm-charts/blob/master/elasticsearch/README.md)
