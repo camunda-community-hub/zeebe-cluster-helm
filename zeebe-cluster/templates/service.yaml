@@ -3,7 +3,12 @@ kind: Service
 metadata:
   name: {{ tpl .Values.global.zeebe . | quote }}
   labels:
+    app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: {{ tpl .Values.global.zeebe . | quote }}
 {{- toYaml  .Values.labels | nindent 4 }}
+  annotations:
+{{- toYaml  .Values.annotations | nindent 4 }}    
 spec:
   clusterIP: None
   publishNotReadyAddresses: true
@@ -15,12 +20,6 @@ spec:
     - port: {{ .Values.service.gateway.port }}
       protocol: TCP
       name: gateway
-    - port: {{ .Values.service.command.port }}
-      protocol: TCP
-      name: command
-    - port: {{ .Values.service.internal.port }}
-      protocol: TCP
-      name: internal  
   selector:
     app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

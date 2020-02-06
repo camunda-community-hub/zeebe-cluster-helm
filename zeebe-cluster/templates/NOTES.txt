@@ -10,6 +10,7 @@
 - Cluster Name: {{ tpl .Values.global.zeebe . | quote }}
 - ElasticSearch Enabled: {{ .Values.elasticsearch.enabled }} - URL: http://{{ .Values.global.elasticsearch.host }}:{{ .Values.global.elasticsearch.port }}
 - Kibana Enabled: {{ .Values.kibana.enabled }}
+- Prometheus Enabled: {{ .Values.prometheusOperator.enabled }}
 
 The Cluster itself is not exposed as a service that means that you can use kubectl port-forward to access the Zeebe cluster from outside Kubernetes:
 

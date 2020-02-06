@@ -13,27 +13,43 @@ partitionCount: "3"
 replicationFactor: "3"
 cpuThreadCount: "2"
 ioThreadCount: "2"
+pvcSize: "10Gi"
+pvcAccessModes: [ "ReadWriteOnce" ]
 
 elasticsearch:
   enabled: true
-  imageTag: 6.8.1
+  imageTag: 6.8.5
+
+prometheusOperator:
+  enabled: false
+
 kibana:
   enabled: false
-  imageTag: 6.8.1
+  imageTag: 6.8.5
+
+prometheus:
+  servicemonitor:
+    enabled: false
 
 JavaOpts: |
   -XX:+UseParallelGC 
   -XX:MinHeapFreeRatio=5
-  -XX:MaxHeapFreeRatio=10 
+  -XX:MaxHeapFreeRatio=10
+  -XX:MaxRAMPercentage=25.0 
   -XX:GCTimeRatio=4 
   -XX:AdaptiveSizePolicyWeight=90
   -XX:+PrintFlagsFinal
+  -Xmx4g
+  -Xms4g
+  -XX:+HeapDumpOnOutOfMemoryError
+  -XX:HeapDumpPath=/usr/local/zeebe/data
+  -XX:ErrorFile=/usr/local/zeebe/data/zeebe_error%p.log
 image:
   repository: camunda/zeebe
-  tag: 0.21.1
+  tag: 0.22.1
   pullPolicy: IfNotPresent
 labels:
-  app: zeebe  
+  app: zeebe    
 service:
   type: ClusterIP
   http:
@@ -47,7 +63,13 @@ service:
 resources: 
   requests:
     cpu: 500m
-    memory: 1Gi
+    memory: 2Gi
   limits:
     cpu: 1000m
-    memory: 2Gi
+    memory: 4Gi
+probePath: /ready
+readinessProbe:
+  failureThreshold: 1
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 1

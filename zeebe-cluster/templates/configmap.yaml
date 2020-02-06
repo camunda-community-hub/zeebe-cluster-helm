@@ -1,6 +1,10 @@
 kind: ConfigMap
 metadata:
   name: {{ tpl .Values.global.zeebe . | quote }}
+  labels: 
+    app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: {{ tpl .Values.global.zeebe . | quote }}
 apiVersion: v1
 data:
   startup.sh: |
@@ -21,10 +25,13 @@ data:
     
     exec /usr/local/zeebe/bin/broker
   zeebe.cfg.toml: |
+    {{ .Values.zeebeCfg }}
     # For more information about this configuration visit: https://docs.zeebe.io/operations/the-zeebecfgtoml-file.html
     [threads]
     cpuThreadCount = {{ .Values.cpuThreadCount | quote }}
     ioThreadCount = {{ .Values.ioThreadCount | quote }}
+    [gateway.monitoring]
+    enabled = {{ .Values.gatewayMetrics | default false }}
     [[exporters]]
     id = "elasticsearch"
     className = "io.zeebe.exporter.ElasticsearchExporter"

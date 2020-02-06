@@ -3,7 +3,14 @@ kind: StatefulSet
 metadata:
   name: {{ tpl .Values.global.zeebe . | quote }}
   labels:
+    app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: {{ tpl .Values.global.zeebe . | quote }}
 {{- toYaml  .Values.labels | nindent 4 }}
+  annotations:
+    {{- range $key, $value := .Values.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}   
 spec:
   replicas: {{ .Values.clusterSize  }}
   selector:
@@ -21,7 +28,15 @@ spec:
         app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app: {{ tpl .Values.global.zeebe . | quote }}
+      annotations:
+        {{- range $key, $value := .Values.podAnnotations }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}   
     spec:
+      initContainers:
+        {{- if .Values.extraInitContainers }}
+        {{ tpl .Values.extraInitContainers . | indent 8 }}
+        {{- end }}    
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -49,10 +64,11 @@ spec:
           name: internal
         readinessProbe:
           httpGet:
-            path: /ready
-            port: http
-          initialDelaySeconds: 20
-          periodSeconds: 5
+            path: {{ .Values.probePath }}
+            port: {{ .Values.service.http.port }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
         volumeMounts:
@@ -69,11 +85,14 @@ spec:
         configMap:
           name: {{ tpl .Values.global.zeebe . | quote }}
           defaultMode: 0744
+      securityContext:
+{{ toYaml .Values.podSecurityContext | indent 8 }}
   volumeClaimTemplates:
   - metadata:
       name: data
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes: {{ .Values.pvcAccessModes }}
+      storageClassName: {{ .Values.pvcStorageClassName }}
       resources:
         requests:
-          storage: 5Gi
+          storage: {{ .Values.pvcSize | quote }}
