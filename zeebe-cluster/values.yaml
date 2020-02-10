@@ -74,8 +74,8 @@ readinessProbe:
   successThreshold: 1
   timeoutSeconds: 1
 
-nodeSelector: {}
+nodeSelector: 
 
-tolerations: []
+tolerations: 
 
-affinity: {}
+affinity: 
