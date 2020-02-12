@@ -46,6 +46,9 @@ This functionality is in beta and is subject to change. The design and code is l
 | `pvcAccessModes`                 | Set the Zeebe Cluster Persistence Volume Claim Request accessModes                                                                                                                                | `[ "ReadWriteOnce" ]`  
 | `pvcStorageClassName`                 | Set the Zeebe Cluster Persistence Volume Claim Request storageClassName                                                                                                                                | ``  
 | `extraInitContainers`                 | add extra initContainers sections to StatefulSet                                                                                                                                | ``  
+| `nodeSelector`                 | Node selection constraint to schedule Zeebe on specific nodes                                                                                                                                | {}  
+| `tolerations`                 | Tolerations to allow Zeebe to run on dedicated nodes                                                                                                                                | []  
+| `affinity`                 | Use affinity constraints to schedule Zeebe on specific nodes                                                                                                                                | {}  
 
 ## Dependencies
 
