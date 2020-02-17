@@ -20,14 +20,12 @@ elasticsearch:
   enabled: true
   imageTag: 6.8.5
 
-prometheusOperator:
-  enabled: false
-
 kibana:
   enabled: false
   imageTag: 6.8.5
 
 prometheus:
+  enabled: false
   servicemonitor:
     enabled: false
 
