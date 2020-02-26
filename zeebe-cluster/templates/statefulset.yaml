@@ -35,7 +35,7 @@ spec:
     spec:
       initContainers:
         {{- if .Values.extraInitContainers }}
-        {{ tpl .Values.extraInitContainers . | indent 8 }}
+        {{ tpl .Values.extraInitContainers . | indent 8 | trim }}
         {{- end }}    
       containers:
       - name: {{ .Chart.Name }}
