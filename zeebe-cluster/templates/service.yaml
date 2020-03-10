@@ -16,10 +16,14 @@ spec:
   ports:
     - port: {{ .Values.service.http.port }}
       protocol: TCP
+<<<<<<< HEAD
       name: {{ .Values.service.http.name | default "http" }}  
     - port: {{ .Values.service.gateway.port }}
       protocol: TCP
       name: {{ .Values.service.gateway.name | default "gateway" }}
+=======
+      name: http  
+>>>>>>> adding standalone gateway files - not working yet
   selector:
     app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ tpl .Values.global.zeebe . }}-gateway
+  labels:
+    app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: {{ tpl .Values.global.zeebe . }}-gateway
+  annotations:
+      {{- range $key, $value := .Values.annotations }}
+      {{ $key }}: {{ $value | quote }}
+      {{- end }}   
+spec:
+  replicas: {{ .Values.gateway.replicas  }}
+  selector:
+    matchLabels:
+      app: {{ tpl .Values.global.zeebe . }}-gateway  
+  template:
+    metadata:  
+      labels:
+        app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app: {{ tpl .Values.global.zeebe . }}-gateway
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-gateway
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 26500
+              name: gateway
+            - containerPort: 26502
+              name: cluster
+            - containerPort: 9600
+              name: monitoring
+          env:
+            - name: ZEEBE_STANDALONE_GATEWAY
+              value: "true"
+            - name: ZEEBE_GATEWAY_CLUSTER_MEMBER_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          readinessProbe:
+            tcpSocket:
+              port: gateway
+            initialDelaySeconds: 20
+            periodSeconds: 5
