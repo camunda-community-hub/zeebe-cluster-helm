@@ -49,7 +49,9 @@ This functionality is in beta and is subject to change. The design and code is l
 | `extraInitContainers`                 | add extra initContainers sections to StatefulSet                                                                                                                                | ``  
 | `nodeSelector`                 | Node selection constraint to schedule Zeebe on specific nodes                                                                                                                                | {}  
 | `tolerations`                 | Tolerations to allow Zeebe to run on dedicated nodes                                                                                                                                | []  
-| `affinity`                 | Use affinity constraints to schedule Zeebe on specific nodes                                                                                                                                | {}  
+| `affinity`                 | Use affinity constraints to schedule Zeebe on specific nodes                                                                                                                                | {}
+| `gateway.replicas`         | The number of standalone gateways that should be deployed | `1`
+| `gateway.logLevel`         | The log level of the gateway, one of: ERROR, WARN, INFO, DEBUG, TRACE | `warn`
 
 ## Dependencies
 

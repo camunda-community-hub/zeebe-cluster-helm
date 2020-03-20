@@ -16,6 +16,10 @@ ioThreadCount: "2"
 pvcSize: "10Gi"
 pvcAccessModes: [ "ReadWriteOnce" ]
 
+gateway:
+  replicas: 1
+  logLevel: warn
+
 elasticsearch:
   enabled: true
   imageTag: 6.8.5

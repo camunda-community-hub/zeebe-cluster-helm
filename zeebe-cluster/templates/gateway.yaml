@@ -1,0 +1,86 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+  labels:
+    app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+  annotations:
+    {{- range $key, $value := .Values.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}   
+spec:
+  replicas: {{ .Values.gateway.replicas  }}
+  selector:
+    matchLabels:
+      app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+  template:
+    metadata:  
+      labels:
+        app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}-gateway
+        image: {{ printf "%s:%s" .Values.image.repository .Values.image.tag | quote }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+          - containerPort: 9600
+            name: {{ .Values.service.http.name | default "http" }}
+          - containerPort: 26500
+            name: {{ .Values.service.gateway.name | default "gateway" }}
+          - containerPort: 26502
+            name: {{ .Values.service.internal.name | default "internal" }}
+        env:
+          - name: ZEEBE_STANDALONE_GATEWAY
+            value: "true"
+          - name: ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME
+            value: {{ include "zeebe-cluster.name" . }}
+          - name: ZEEBE_GATEWAY_CLUSTER_MEMBERID
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: ZEEBE_LOG_LEVEL
+            value: {{ .Values.gateway.logLevel | quote }}
+          - name: JAVA_TOOL_OPTIONS
+            value:
+              {{ toYaml .Values.JavaOpts | indent 14 | trim }}
+          - name: ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT
+            value: {{ printf "%s:26502" (tpl .Values.global.zeebe .) | quote }}
+          - name: ZEEBE_GATEWAY_NETWORK_HOST
+            value: 0.0.0.0
+          - name: ZEEBE_GATEWAY_CLUSTER_HOST
+            value: 0.0.0.0
+          - name: ZEEBE_GATEWAY_MONITORING_HOST
+            value: 0.0.0.0
+        securityContext:
+          {{ toYaml .Values.podSecurityContext | indent 12 | trim }}
+        readinessProbe:
+          tcpSocket:
+            port: gateway
+          initialDelaySeconds: 20
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+  labels:
+    app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+  annotations:
+    {{ toYaml  .Values.annotations | indent 4 | trim }}   
+spec:
+  selector:
+    app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+  ports:
+    - port: {{ .Values.service.http.port }}
+      protocol: TCP
+      name: {{ .Values.service.http.name | default "http" }}
+    - port: {{ .Values.service.gateway.port }}
+      protocol: TCP
+      name: {{ .Values.service.gateway.name | default "gateway" }}
