@@ -21,6 +21,7 @@ ioThreadCount: "2"
 pvcSize: "10Gi"
 pvcAccessModes: [ "ReadWriteOnce" ]
 env: []
+logLevel: warn
 
 gateway:
   replicas: 1
