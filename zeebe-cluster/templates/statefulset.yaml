@@ -53,6 +53,9 @@ spec:
         - name: JAVA_TOOL_OPTIONS
           value: 
            {{- toYaml .Values.JavaOpts | nindent 12}}
+        {{- if .Values.env }}
+        {{ toYaml .Values.env | indent 8 | trim }}
+        {{- end }}
         ports:
         - containerPort: 9600
           name: {{ .Values.service.http.name | default "http" }}

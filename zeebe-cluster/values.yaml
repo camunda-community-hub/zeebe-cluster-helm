@@ -15,6 +15,7 @@ cpuThreadCount: "2"
 ioThreadCount: "2"
 pvcSize: "10Gi"
 pvcAccessModes: [ "ReadWriteOnce" ]
+env: []
 
 elasticsearch:
   enabled: true
