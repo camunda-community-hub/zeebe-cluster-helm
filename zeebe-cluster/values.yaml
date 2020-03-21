@@ -20,6 +20,11 @@ elasticsearch:
   enabled: true
   imageTag: 6.8.5
 
+elasticsearch-curator:
+  enabled: true
+  cronjob:
+    schedule: "0 3 * * *"  # run every 03:00 AM daily
+
 kibana:
   enabled: false
   imageTag: 6.8.5
