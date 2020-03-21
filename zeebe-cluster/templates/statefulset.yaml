@@ -55,13 +55,13 @@ spec:
            {{- toYaml .Values.JavaOpts | nindent 12}}
         ports:
         - containerPort: 9600
-          name: http
+          name: {{ .Values.service.http.name | default "http" }}
         - containerPort: 26500
-          name: gateway
+          name: {{ .Values.service.gateway.name | default "gateway" }}
         - containerPort: 26501
-          name: command
+          name: {{ .Values.service.command.name | default "command" }}
         - containerPort: 26502
-          name: internal
+          name: {{ .Values.service.internal.name | default "internal" }}
         readinessProbe:
           httpGet:
             path: {{ .Values.probePath }}
