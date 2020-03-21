@@ -15,6 +15,10 @@ cpuThreadCount: "2"
 ioThreadCount: "2"
 pvcSize: "10Gi"
 pvcAccessModes: [ "ReadWriteOnce" ]
+extraConfigPaths: []
+
+elasticExporter:
+  enabled: true
 
 elasticsearch:
   enabled: true
@@ -44,7 +48,7 @@ JavaOpts: |
   -XX:ErrorFile=/usr/local/zeebe/data/zeebe_error%p.log
 image:
   repository: camunda/zeebe
-  tag: 0.22.1
+  tag: 0.23.0-alpha2
   pullPolicy: IfNotPresent
 labels:
   app: zeebe    

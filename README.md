@@ -50,6 +50,10 @@ This functionality is in beta and is subject to change. The design and code is l
 | `nodeSelector`                 | Node selection constraint to schedule Zeebe on specific nodes                                                                                                                                | {}  
 | `tolerations`                 | Tolerations to allow Zeebe to run on dedicated nodes                                                                                                                                | []  
 | `affinity`                 | Use affinity constraints to schedule Zeebe on specific nodes                                                                                                                                | {}  
+| `elasticExporter.enabled`    | Enables the built-in Elasticsearch exporter that will export data to the configured
+Elasticsearch host | `true`
+| `extraConfig`                | You can add additional configuration path that will be loaded in addition to the
+default configuration. See the Spring Boot documentation for more. | `[]`
 
 ## Dependencies
 

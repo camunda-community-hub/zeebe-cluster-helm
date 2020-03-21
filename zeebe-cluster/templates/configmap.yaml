@@ -11,59 +11,42 @@ data:
     #!/usr/bin/env bash
     set -eux -o pipefail
 
-    export ZEEBE_ADVERTISED_HOST=${ZEEBE_ADVERTISED_HOST:-$(hostname -f)}
-    export ZEEBE_NODE_ID=${ZEEBE_NODE_ID:-${K8S_POD_NAME##*-}}
+    export ZEEBE_BROKER_NETWORK_ADVERTISEDHOST=${ZEEBE_BROKER_NETWORK_ADVERTISEDHOST:-$(hostname -f)}
+    export ZEEBE_BROKER_CLUSTER_NODEID=${ZEEBE_BROKER_CLUSTER_NODEID:-${K8S_POD_NAME##*-}}
 
     # As the number of replicas or the DNS is not obtainable from the downward API yet,
     # defined them here based on conventions
-    export ZEEBE_CLUSTER_SIZE=${ZEEBE_CLUSTER_SIZE:-1}
+    export ZEEBE_BROKER_CLUSTER_CLUSTERSIZE=${ZEEBE_BROKER_CLUSTER_CLUSTERSIZE:-1}
     contactPointPrefix=${K8S_POD_NAME%-*}
-    contactPoints=${ZEEBE_CONTACT_POINTS:-""}
+    contactPoints=${ZEEBE_BROKER_INITIALCONTACTPOINTS:-""}
     if [[ -z "${contactPoints}" ]]; then
-      for ((i=0; i<${ZEEBE_CLUSTER_SIZE}; i++))
+      for ((i=0; i<${ZEEBE_BROKER_CLUSTER_CLUSTERSIZE}; i++))
       do
         contactPoints="${contactPoints},${contactPointPrefix}-$i.$(hostname -d):26502"
       done
 
-      export ZEEBE_CONTACT_POINTS="${contactPoints}"
+      export ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS="${contactPoints}"
     fi
 
-    exec /usr/local/zeebe/bin/broker
-  zeebe.cfg.toml: |
-    {{ .Values.zeebeCfg }}
-    # For more information about this configuration visit: https://docs.zeebe.io/operations/the-zeebecfgtoml-file.html
-    [threads]
-    cpuThreadCount = {{ .Values.cpuThreadCount | quote }}
-    ioThreadCount = {{ .Values.ioThreadCount | quote }}
-    [gateway.monitoring]
-    enabled = {{ .Values.gatewayMetrics | default false }}
-    [[exporters]]
-    id = "elasticsearch"
-    className = "io.zeebe.exporter.ElasticsearchExporter"
-      [exporters.args]
-      url = "http://{{ .Values.global.elasticsearch.host }}:{{ .Values.global.elasticsearch.port }}"
-
-      [exporters.args.bulk]
-      delay = 5
-      size = 1_000
-
-      #[exporters.args.authentication]
-      #username = elastic
-      #password = changeme
-
-      [exporters.args.index]
-      prefix = "zeebe-record"
-      createTemplate = true
-
-      command = false
-      event = true
-      rejection = false
-
-      deployment = true
-      incident = true
-      job = true
-      message = false
-      messageSubscription = false
-      raft = false
-      workflowInstance = true
-      workflowInstanceSubscription = false
+    exec /usr/local/zeebe/bin/broker "$@"
+  broker.cfg.yml: |
+    zeebe:
+      broker:
+        threads:
+          cpuThreadCount: {{ .Values.cpuThreadCount }}
+          ioThreadCount: {{ .Values.ioThreadCount }}
+        gateway:
+          monitoring:
+            enabled: {{ .Values.gatewayMetrics | default true }}
+        {{- if .Values.elasticExporter.enabled }}
+        exporters:
+          elasticsearch:
+            className: "io.zeebe.exporter.ElasticsearchExporter"
+            args:
+              url: "http://{{ .Values.global.elasticsearch.host }}:{{ .Values.global.elasticsearch.port }}"
+              bulk:
+                delay: 5
+                size: 1000
+              index:
+                prefix: "zeebe-record"
+        {{- end }}

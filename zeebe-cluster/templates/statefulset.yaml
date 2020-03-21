@@ -41,14 +41,20 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+          - "--spring.profiles.active=default"
+          - "--spring.config.location=file:./config/zeebe.cfg.yaml"
+          {{- if .Values.extraConfig }}
+          - {{ printf "--spring.config.additional-location=%s" (join "," .Values.extraConfig) | quote }}
+          {{- end }}
         env:
         - name: ZEEBE_LOG_LEVEL
           value: debug
-        - name: ZEEBE_PARTITIONS_COUNT
+        - name: ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT
           value: {{ .Values.partitionCount | quote }}
-        - name: ZEEBE_CLUSTER_SIZE
+        - name: ZEEBE_BROKER_CLUSTER_CLUSTERSIZE
           value: {{ .Values.clusterSize | quote }}
-        - name: ZEEBE_REPLICATION_FACTOR
+        - name: ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR
           value: {{ .Values.replicationFactor | quote }}
         - name: K8S_POD_NAME
           valueFrom:
@@ -77,8 +83,8 @@ spec:
           {{- toYaml .Values.resources | nindent 12 }}
         volumeMounts:
         - name: config
-          mountPath: /usr/local/zeebe/conf/zeebe.cfg.toml
-          subPath: zeebe.cfg.toml
+          mountPath: /usr/local/zeebe/config/zeebe.cfg.yaml
+          subPath: broker.cfg.yml
         - name: config
           mountPath: /usr/local/bin/startup.sh
           subPath: startup.sh
