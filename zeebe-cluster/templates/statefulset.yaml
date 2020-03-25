@@ -62,13 +62,13 @@ spec:
         {{- end }}
         ports:
         - containerPort: 9600
-          name: {{ .Values.service.http.name | default "http" }}
+          name: {{ default "http" .Values.service.http.name  }}
         - containerPort: 26500
-          name: {{ .Values.service.gateway.name | default "gateway" }}
+          name: {{ default "gateway" .Values.service.gateway.name  }}
         - containerPort: 26501
-          name: {{ .Values.service.command.name | default "command" }}
+          name: {{ default "command" .Values.service.command.name  }}
         - containerPort: 26502
-          name: {{ .Values.service.internal.name | default "internal" }}
+          name: {{ default "internal" .Values.service.internal.name  }}
         readinessProbe:
           httpGet:
             path: {{ .Values.probePath }}

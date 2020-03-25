@@ -16,10 +16,10 @@ spec:
   ports:
     - port: {{ .Values.service.http.port }}
       protocol: TCP
-      name: {{ .Values.service.http.name | default "http" }}  
+      name: {{ default "http" .Values.service.http.name  }}  
     - port: {{ .Values.service.gateway.port }}
       protocol: TCP
-      name: {{ .Values.service.gateway.name | default "gateway" }}
+      name: {{ default "gateway" .Values.service.gateway.name  }}
   selector:
     app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
