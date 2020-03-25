@@ -59,7 +59,6 @@ env:
 | `gateway.replicas`         | The number of standalone gateways that should be deployed | `1`
 | `gateway.logLevel`         | The log level of the gateway, one of: ERROR, WARN, INFO, DEBUG, TRACE | `warn`
 
-
 ## Dependencies
 
 This chart currently depends on the following charts:
