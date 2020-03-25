@@ -62,13 +62,9 @@ spec:
         {{- end }}
         ports:
         - containerPort: 9600
-<<<<<<< HEAD
           name: {{ .Values.service.http.name | default "http" }}
         - containerPort: 26500
           name: {{ .Values.service.gateway.name | default "gateway" }}
-=======
-          name: http
->>>>>>> adding standalone gateway files - not working yet
         - containerPort: 26501
           name: {{ .Values.service.command.name | default "command" }}
         - containerPort: 26502
