@@ -15,7 +15,7 @@
 
 The Cluster itself is not exposed as a service that means that you can use kubectl port-forward to access the Zeebe cluster from outside Kubernetes:
 
-> kubectl port-forward svc/{{ tpl .Values.global.zeebe . }} 26500:26500
+> kubectl port-forward svc/{{ tpl .Values.global.zeebe . }} 26500:26500 -n {{ .Release.Namespace }}
 
 Now you can connect your workers and clients to `localhost:26500`
 
