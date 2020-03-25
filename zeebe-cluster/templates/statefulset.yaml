@@ -50,6 +50,10 @@ spec:
           value: {{ .Values.clusterSize | quote }}
         - name: ZEEBE_REPLICATION_FACTOR
           value: {{ .Values.replicationFactor | quote }}
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         - name: JAVA_TOOL_OPTIONS
           value: 
            {{- toYaml .Values.JavaOpts | nindent 12}}
