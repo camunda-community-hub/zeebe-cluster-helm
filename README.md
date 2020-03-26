@@ -59,13 +59,13 @@ env:
 | `gateway.replicas`         | The number of standalone gateways that should be deployed | `1`
 | `gateway.logLevel`         | The log level of the gateway, one of: ERROR, WARN, INFO, DEBUG, TRACE | `warn`
 | `serviceHttpPort`         | The http port used by the brokers and the gateway| `9600`
-| `servicGatewayPort`         | The gateway port used by the gateway | `26500`
+| `serviceGatewayPort`         | The gateway port used by the gateway | `26500`
 | `serviceInternalPort`         | The internal port used by the brokers and the gateway | `26502`
-| `servicCommandPort`         | The command port used the brokers | `26501`
+| `serviceCommandPort`         | The command port used the brokers | `26501`
 | `serviceHttpName`         | The http port name used by the brokers and the gateway| `http`
-| `servicGatewayName`         | The gateway port name used by the gateway | `gateway`
+| `serviceGatewayName`         | The gateway port name used by the gateway | `gateway`
 | `serviceInternalName`         | The internal port name used by the brokers and the gateway | `internal`
-| `servicCommandName`         | The command port name used the brokers | `command`
+| `serviceCommandName`         | The command port name used the brokers | `command`
 
 ## Dependencies
 

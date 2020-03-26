@@ -63,8 +63,8 @@ spec:
         ports:
         - containerPort: {{ .Values.serviceHttpPort  }}
           name: {{ default "http" .Values.serviceHttpName  }}
-        - containerPort: {{ .Values.servicCommandPort  }}
-          name: {{ default "command" .Values.servicCommandName  }}
+        - containerPort: {{ .Values.serviceCommandPort  }}
+          name: {{ default "command" .Values.serviceCommandName  }}
         - containerPort: {{ .Values.serviceInternalPort  }}
           name: {{ default "internal" .Values.serviceInternalName  }}
         readinessProbe:
