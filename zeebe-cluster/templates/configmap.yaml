@@ -36,7 +36,7 @@ data:
     cpuThreadCount = {{ .Values.cpuThreadCount | quote }}
     ioThreadCount = {{ .Values.ioThreadCount | quote }}
     [gateway]
-    enabled = false
+    enable = false
     [gateway.monitoring]
     enabled = {{ .Values.gatewayMetrics | default false }}
     [[exporters]]
