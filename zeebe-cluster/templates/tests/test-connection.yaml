@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args:  ['{{ .Values.global.zeebe }}:{{ .Values.service.http.port }}']
+      args:  ['{{ .Values.global.zeebe }}:{{ .Values.serviceHttpPort }}']
   restartPolicy: Never
