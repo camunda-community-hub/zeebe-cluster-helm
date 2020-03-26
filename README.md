@@ -1,6 +1,6 @@
 # Zeebe Cluster Helm Chart
 
-This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.
+This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.
 
 ## Requirements
 
@@ -12,7 +12,7 @@ This functionality is in beta and is subject to change. The design and code is l
 
 ## Installing
 
-* Add the official zeebe helm charts repo
+* Add the official Zeebe helm charts repo
 
   ```shell
   helm repo add zeebe https://helm.zeebe.io
@@ -56,6 +56,16 @@ env:
 | `nodeSelector`                 | Node selection constraint to schedule Zeebe on specific nodes                                                                                                                                | {}  
 | `tolerations`                 | Tolerations to allow Zeebe to run on dedicated nodes                                                                                                                                | []  
 | `affinity`                 | Use affinity constraints to schedule Zeebe on specific nodes                                                                                                                                | {}  
+| `gateway.replicas`         | The number of standalone gateways that should be deployed | `1`
+| `gateway.logLevel`         | The log level of the gateway, one of: ERROR, WARN, INFO, DEBUG, TRACE | `warn`
+| `serviceHttpPort`         | The http port used by the brokers and the gateway| `9600`
+| `servicGatewayPort`         | The gateway port used by the gateway | `26500`
+| `serviceInternalPort`         | The internal port used by the brokers and the gateway | `26502`
+| `servicCommandPort`         | The command port used the brokers | `26501`
+| `serviceHttpName`         | The http port name used by the brokers and the gateway| `http`
+| `servicGatewayName`         | The gateway port name used by the gateway | `gateway`
+| `serviceInternalName`         | The internal port name used by the brokers and the gateway | `internal`
+| `servicCommandName`         | The command port name used the brokers | `command`
 
 ## Dependencies
 

@@ -61,18 +61,16 @@ spec:
         {{ toYaml .Values.env | indent 8 | trim }}
         {{- end }}
         ports:
-        - containerPort: 9600
-          name: {{ .Values.service.http.name | default "http" }}
-        - containerPort: 26500
-          name: {{ .Values.service.gateway.name | default "gateway" }}
-        - containerPort: 26501
-          name: {{ .Values.service.command.name | default "command" }}
-        - containerPort: 26502
-          name: {{ .Values.service.internal.name | default "internal" }}
+        - containerPort: {{ .Values.serviceHttpPort  }}
+          name: {{ default "http" .Values.serviceHttpName  }}
+        - containerPort: {{ .Values.servicCommandPort  }}
+          name: {{ default "command" .Values.servicCommandName  }}
+        - containerPort: {{ .Values.serviceInternalPort  }}
+          name: {{ default "internal" .Values.serviceInternalName  }}
         readinessProbe:
           httpGet:
             path: {{ .Values.probePath }}
-            port: {{ .Values.service.http.port }}
+            port: {{ .Values.serviceHttpPort }}
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
