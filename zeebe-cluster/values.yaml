@@ -55,8 +55,8 @@ labels:
   app: zeebe    
 serviceType: ClusterIP
 serviceHttpPort: 9600
-servicGatewayPort: 26500    
-servicCommandPort: 26501     
+serviceGatewayPort: 26500    
+serviceCommandPort: 26501     
 serviceInternalPort: 26502  
 resources: 
   requests:
