@@ -28,11 +28,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 9600
-              name: {{ .Values.service.http.name | default "http" }}
+              name: {{  default "http" .Values.serviceHttpName }}
             - containerPort: 26500
-              name: {{ .Values.service.gateway.name | default "gateway" }}
+              name: {{ default "gateway" .Values.serviceGatewayName  }}
             - containerPort: 26502
-              name: {{ .Values.service.internal.name | default "internal" }}
+              name: {{ default "internal" .Values.serviceInternalName  }}
           env:
             - name: ZEEBE_STANDALONE_GATEWAY
               value: "true"

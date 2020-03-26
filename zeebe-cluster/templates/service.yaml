@@ -12,14 +12,14 @@ metadata:
 spec:
   clusterIP: None
   publishNotReadyAddresses: true
-  type: {{ .Values.service.type }}
+  type: {{ .Values.serviceType }}
   ports:
-    - port: {{ .Values.service.http.port }}
+    - port: {{ .Values.serviceHttpPort }}
       protocol: TCP
-      name: {{ default "http" .Values.service.http.name  }}  
-    - port: {{ .Values.service.gateway.port }}
+      name: {{ default "http" .Values.serviceHttpName  }}  
+    - port: {{ .Values.serviceGatewayPort }}
       protocol: TCP
-      name: {{ default "gateway" .Values.service.gateway.name  }}
+      name: {{ default "gateway" .Values.serviceGatewayName  }}
   selector:
     app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

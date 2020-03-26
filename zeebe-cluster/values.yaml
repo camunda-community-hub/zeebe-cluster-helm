@@ -53,14 +53,10 @@ image:
   pullPolicy: IfNotPresent
 labels:
   app: zeebe    
-service:
-  type: ClusterIP
-  http:
-    port: 9600
-  command:
-    port: 26501  
-  internal:
-    port: 26502
+serviceType: ClusterIP
+serviceHttpPort: 9600
+servicCommandPort: 26501     
+serviceInternalPort: 26502  
 resources: 
   requests:
     cpu: 500m
