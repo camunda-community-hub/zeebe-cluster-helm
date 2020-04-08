@@ -29,8 +29,8 @@ data:
     fi
 
     ls -al /exporters/
-    cp -a /exporters/*.jar /usr/local/zeebe/lib/
-    
+    cp -a /exporters/*.jar /usr/local/zeebe/exporters/
+
     exec /usr/local/zeebe/bin/broker
   zeebe.cfg.toml: |
     {{ .Values.zeebeCfg }}
