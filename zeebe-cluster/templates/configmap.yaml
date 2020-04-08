@@ -28,8 +28,12 @@ data:
       export ZEEBE_CONTACT_POINTS="${contactPoints}"
     fi
 
-    ls -al /exporters/
-    cp -a /exporters/*.jar /usr/local/zeebe/exporters/
+    
+    if [ "$(ls -A /exporters/)" ]; then
+      cp -a /exporters/*.jar /usr/local/zeebe/exporters/
+    else  
+      echo "No exporters available."
+    fi
 
     exec /usr/local/zeebe/bin/broker
   zeebe.cfg.toml: |
