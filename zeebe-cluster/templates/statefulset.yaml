@@ -88,7 +88,7 @@ spec:
         - name: exporters
           mountPath: /exporters/
         securityContext:
-          {{ toYaml .Values.podSecurityContext | indent 12 | trim }}  
+          {{ toYaml .Values.podSecurityContext | indent 12 | trim }}
       volumes:
       - name: config
         configMap:
@@ -96,8 +96,6 @@ spec:
           defaultMode: 0744
       - name: exporters
         emptyDir: {}    
-      securityContext:
-{{ toYaml .Values.podSecurityContext | indent 8 }}
 {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
