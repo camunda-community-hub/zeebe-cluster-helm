@@ -86,7 +86,7 @@ spec:
         - name: data
           mountPath: /usr/local/zeebe/data
         - name: exporters
-          mountPath: /exporters/
+          mountPath: /exporters
         securityContext:
           {{ toYaml .Values.podSecurityContext | indent 12 | trim }}
       volumes:
