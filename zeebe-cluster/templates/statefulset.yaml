@@ -85,6 +85,8 @@ spec:
           subPath: startup.sh
         - name: data
           mountPath: /usr/local/zeebe/data
+        - name: exporters
+          mountPath: /exporters/
         securityContext:
           {{ toYaml .Values.podSecurityContext | indent 12 | trim }}
       volumes:
@@ -92,6 +94,8 @@ spec:
         configMap:
           name: {{ tpl .Values.global.zeebe . | quote }}
           defaultMode: 0744
+      - name: exporters
+        emptyDir: {}    
 {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
