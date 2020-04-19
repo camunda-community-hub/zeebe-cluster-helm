@@ -59,6 +59,6 @@ spec:
             {{ toYaml .Values.podSecurityContext | indent 12 | trim }}       
           readinessProbe:
             tcpSocket:
-              port: gateway
+              port: {{ default "gateway" .Values.serviceGatewayName  }}
             initialDelaySeconds: 20
             periodSeconds: 5
