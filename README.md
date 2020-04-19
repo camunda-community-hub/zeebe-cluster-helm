@@ -1,6 +1,6 @@
 # Zeebe Cluster Helm Chart
 
-This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.
+This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.
 
 ## Requirements
 
@@ -12,7 +12,7 @@ This functionality is in beta and is subject to change. The design and code is l
 
 ## Installing
 
-* Add the official zeebe helm charts repo
+* Add the official Zeebe helm charts repo
 
   ```shell
   helm repo add zeebe https://helm.zeebe.io
@@ -42,7 +42,8 @@ This functionality is in beta and is subject to change. The design and code is l
 | `zeebeCfg`                 | Can be used to set several zeebe configuration options.                                                                                                                                | `null`
 | `gatewayMetrics`                 | Enables the exporting of the gateway prometheus metrics                                                                                                                                | `false`
 | `JavaOpts`                 | Set the Zeebe Cluster Broker JavaOpts. This is where you should configure the jvm heap size.                                                                                                                                | `-XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:MaxRAMPercentage=25.0 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:+PrintFlagsFinal`  
-| `resources`                 | Set the Zeebe Cluster Broker Kubernetes Resource Request and Limits                                                                                                                                | `requests:`<br>  `cpu: 500m`<br>  ` memory: 1Gi`<br>`limits:`<br>  ` cpu: 1000m`<br>  ` memory: 2Gi`  
+| `resources`                 | Set the Zeebe Cluster Broker Kubernetes Resource Request and Limits                                                                                                                                | `requests:`<br>  `cpu: 500m`<br>  ` memory: 1Gi`<br>`limits:`<br>  ` cpu: 1000m`<br>  ` memory: 2Gi`
+| `env`                       |  Pass additional environment variables to the Zeebe broker pods; <br> variables should be specified using standard Kubernetes raw YAML format. See below for an example.| `[]`
 | `pvcSize`                 | Set the Zeebe Cluster Persistence Volume Claim Request storage size                                                                                                                                | `10Gi`  
 | `pvcAccessModes`                 | Set the Zeebe Cluster Persistence Volume Claim Request accessModes                                                                                                                                | `[ "ReadWriteOnce" ]`  
 | `pvcStorageClassName`                 | Set the Zeebe Cluster Persistence Volume Claim Request storageClassName                                                                                                                                | ``  
@@ -50,6 +51,26 @@ This functionality is in beta and is subject to change. The design and code is l
 | `nodeSelector`                 | Node selection constraint to schedule Zeebe on specific nodes                                                                                                                                | {}  
 | `tolerations`                 | Tolerations to allow Zeebe to run on dedicated nodes                                                                                                                                | []  
 | `affinity`                 | Use affinity constraints to schedule Zeebe on specific nodes                                                                                                                                | {}  
+| `gateway.replicas`         | The number of standalone gateways that should be deployed | `1`
+| `gateway.logLevel`         | The log level of the gateway, one of: ERROR, WARN, INFO, DEBUG, TRACE | `warn`
+| `serviceHttpPort`         | The http port used by the brokers and the gateway| `9600`
+| `serviceGatewayPort`         | The gateway port used by the gateway | `26500`
+| `serviceInternalPort`         | The internal port used by the brokers and the gateway | `26502`
+| `serviceCommandPort`         | The command port used the brokers | `26501`
+| `serviceHttpName`         | The http port name used by the brokers and the gateway| `http`
+| `serviceGatewayName`         | The gateway port name used by the gateway | `gateway`
+| `serviceInternalName`         | The internal port name used by the brokers and the gateway | `internal`
+| `serviceCommandName`         | The command port name used the brokers | `command`
+
+## Examples
+
+### Env Example
+```yaml
+
+env:
+  - name: ZEEBE_GATEWAY_MONITORING_ENABLED
+    value: "true"
+```
 
 ## Dependencies
 
