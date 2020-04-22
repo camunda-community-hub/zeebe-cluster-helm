@@ -66,14 +66,12 @@ spec:
           value: {{  .Values.serviceInternalPort }}
         - name: ZEEBE_BROKER_NETWORK_MONITORINGAPI_PORT
           value: {{  .Values.serviceHttpPort }}         
-        
         - name: K8S_POD_NAME
           valueFrom:
             fieldRef:
               fieldPath: metadata.name              
         - name: JAVA_TOOL_OPTIONS
-          value: 
-           {{- toYaml .Values.JavaOpts | nindent 12}}
+          value: {{ .Values.JavaOpts | quote }}
         {{- if .Values.env }}
         {{ toYaml .Values.env | indent 8 | trim }}
         {{- end }}

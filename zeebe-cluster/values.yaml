@@ -39,12 +39,12 @@ prometheus:
   servicemonitor:
     enabled: false
 
-JavaOpts: |
-  -XX:+UseParallelGC 
+JavaOpts: >-
+  -XX:+UseParallelGC
   -XX:MinHeapFreeRatio=5
   -XX:MaxHeapFreeRatio=10
   -XX:MaxRAMPercentage=25.0
-  -XX:GCTimeRatio=4 
+  -XX:GCTimeRatio=4
   -XX:AdaptiveSizePolicyWeight=90
   -XX:+PrintFlagsFinal
   -Xmx4g
