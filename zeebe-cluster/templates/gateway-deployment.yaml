@@ -38,7 +38,7 @@ spec:
               value: "true"
             - name: ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME
               value: {{ include "zeebe-cluster.name" . }}  
-            - name: ZEEBE_GATEWAY_CLUSTER_MEMBER_ID
+            - name: ZEEBE_GATEWAY_CLUSTER_MEMBERID
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
@@ -47,14 +47,20 @@ spec:
             - name: JAVA_TOOL_OPTIONS
               value:
                 {{ toYaml .Values.JavaOpts | indent 14 | trim }}
-            - name: ZEEBE_GATEWAY_CONTACT_POINT
-              value: {{ printf "%s:26502" (tpl .Values.global.zeebe .) | quote }}
+            - name: ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT
+              value: {{ printf "%s:%d" (tpl .Values.global.zeebe .) .Values.serviceInternalPort | quote }}
             - name: ZEEBE_GATEWAY_NETWORK_HOST
               value: 0.0.0.0
+            - name: ZEEBE_GATEWAY_NETWORK_PORT
+              value: {{  .Values.serviceGatewayPort }}
             - name: ZEEBE_GATEWAY_CLUSTER_HOST
               value: 0.0.0.0
+            - name: ZEEBE_GATEWAY_CLUSTER_PORT
+              value: {{  .Values.serviceInternalPort }}
             - name: ZEEBE_GATEWAY_MONITORING_HOST
               value: 0.0.0.0   
+            - name: ZEEBE_GATEWAY_MONITORING_PORT
+              value: {{  .Values.serviceHttpPort }}              
           securityContext:
             {{ toYaml .Values.podSecurityContext | indent 12 | trim }}       
           readinessProbe:
