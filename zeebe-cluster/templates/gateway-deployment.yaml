@@ -47,7 +47,7 @@ spec:
             - name: JAVA_TOOL_OPTIONS
               value: {{ .Values.JavaOpts | quote }}
             - name: ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT
-              value: {{ printf "%s:%d" (tpl .Values.global.zeebe .) .Values.serviceInternalPort | quote }}
+              value: {{ tpl .Values.global.zeebe . }}:{{ .Values.serviceInternalPort }}
             - name: ZEEBE_GATEWAY_NETWORK_HOST
               value: 0.0.0.0
             - name: ZEEBE_GATEWAY_NETWORK_PORT
