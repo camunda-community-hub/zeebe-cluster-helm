@@ -20,6 +20,9 @@ spec:
     - port: {{ .Values.serviceInternalPort }}
       protocol: TCP
       name: {{ default "internal" .Values.serviceInternalName  }}
+    - port: {{ .Values.serviceCommandPort }}
+      protocol: TCP
+      name: {{ default "command" .Values.serviceCommandName }}
   selector:
     app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
