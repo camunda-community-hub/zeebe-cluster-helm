@@ -44,19 +44,34 @@ spec:
         env:
         - name: ZEEBE_LOG_LEVEL
           value: debug
-        - name: ZEEBE_PARTITIONS_COUNT
+        - name: ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT
           value: {{ .Values.partitionCount | quote }}
-        - name: ZEEBE_CLUSTER_SIZE
+        - name: ZEEBE_BROKER_CLUSTER_CLUSTERSIZE
           value: {{ .Values.clusterSize | quote }}
-        - name: ZEEBE_REPLICATION_FACTOR
+        - name: ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR
           value: {{ .Values.replicationFactor | quote }}
+        - name: ZEEBE_BROKER_THREADS_CPUTHREADCOUNT
+          value: {{ .Values.cpuThreadCount  | quote }}
+        - name: ZEEBE_BROKER_THREADS_IOTHREADCOUNT
+          value: {{ .Values.ioThreadCount  | quote }}
+        - name: ZEEBE_BROKER_GATEWAY_ENABLE
+          value: "false"
+        - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME
+          value: "io.zeebe.exporter.ElasticsearchExporter"
+        - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_URL
+          value: "http://{{ .Values.global.elasticsearch.host }}:{{ .Values.global.elasticsearch.port }}"
+        - name: ZEEBE_BROKER_NETWORK_COMMANDAPI_PORT
+          value: {{ .Values.serviceCommandPort  | quote }}
+        - name: ZEEBE_BROKER_NETWORK_INTERNALAPI_PORT
+          value: {{  .Values.serviceInternalPort | quote }}
+        - name: ZEEBE_BROKER_NETWORK_MONITORINGAPI_PORT
+          value: {{  .Values.serviceHttpPort | quote }}         
         - name: K8S_POD_NAME
           valueFrom:
             fieldRef:
-              fieldPath: metadata.name
+              fieldPath: metadata.name              
         - name: JAVA_TOOL_OPTIONS
-          value: 
-           {{- toYaml .Values.JavaOpts | nindent 12}}
+          value: {{ .Values.JavaOpts | quote }}
         {{- if .Values.env }}
         {{ toYaml .Values.env | indent 8 | trim }}
         {{- end }}
@@ -78,8 +93,8 @@ spec:
           {{- toYaml .Values.resources | nindent 12 }}
         volumeMounts:
         - name: config
-          mountPath: /usr/local/zeebe/conf/zeebe.cfg.toml
-          subPath: zeebe.cfg.toml
+          mountPath: /usr/local/zeebe/config/application.yaml
+          subPath: application.yaml
         - name: config
           mountPath: /usr/local/bin/startup.sh
           subPath: startup.sh

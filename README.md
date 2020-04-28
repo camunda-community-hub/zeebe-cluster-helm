@@ -72,6 +72,92 @@ env:
     value: "true"
 ```
 
+
+## Adding dynamic exporters to Zeebe Brokers
+
+This chart supports the addition of Zeebe Exporters by using initContainer as shown in the following example:
+
+```
+extraInitContainers: |
+  - name: init-exporters-hazelcast
+    image: busybox:1.28
+    command: ['/bin/sh', '-c']
+    args: ['wget --no-check-certificate https://repo1.maven.org/maven2/io/zeebe/hazelcast/zeebe-hazelcast-exporter/0.8.0-alpha1/zeebe-hazelcast-exporter-0.8.0-alpha1-jar-with-dependencies.jar -O /exporters/zeebe-hazelcast-exporter.jar; ls -al']
+    volumeMounts:
+    - name: exporters
+      mountPath: /exporters/
+  - name: init-exporters-kafka
+    image: busybox:1.28
+    command: ['/bin/sh', '-c']
+    args: ['wget --no-check-certificate https://github.com/zeebe-io/zeebe-kafka-exporter/releases/download/1.1.0/zeebe-kafka-exporter-1.1.0-uber.jar -O /exporters/zeebe-kafka-exporter.jar; ls -al']
+    volumeMounts:
+    - name: exporters
+      mountPath: /exporters/    
+zeebeCfg: |- 
+  [[exporters]]
+  id = "elasticsearch"
+  className = "io.zeebe.exporter.ElasticsearchExporter"
+    [exporters.args]
+    url = "http://elasticsearch-master:9200"
+    [exporters.args.bulk]
+    delay = 5
+    size = 1_000
+    #[exporters.args.authentication]
+    #username = elastic
+    #password = changeme
+    [exporters.args.index]
+    prefix = "zeebe-record"
+    createTemplate = true
+    command = false
+    event = true
+    rejection = false
+    deployment = true
+    incident = true
+    job = true
+    message = false
+    messageSubscription = false
+    raft = false
+    workflowInstance = true
+    workflowInstanceSubscription = false
+  
+  [[exporters]]
+  id = "hazelcast"
+  className = "io.zeebe.hazelcast.exporter.HazelcastExporter"
+    [exporters.args]
+    enabledValueTypes = "JOB,WORKFLOW_INSTANCE,DEPLOYMENT,INCIDENT,TIMER,VARIABLE,MESSAGE,MESSAGE_SUBSCRIPTION,MESSAGE_START_EVENT_SUBSCRIPTION"
+    updatePosition = false
+  
+  [[exporters]]
+  id = "kafka"
+  className = "io.zeebe.exporters.kafka.KafkaExporter"
+    [exporters.args]
+    maxInFlightRecords = 1000
+    inFlightRecordCheckIntervalMs = 1000
+    
+    [exporters.args.producer]
+    servers = [ "my-kafka:9092" ]
+    requestTimeoutMs = 5000
+    closeTimeoutMs = 5000
+    clientId = "zeebe"    
+    maxConcurrentRequests = 3
+    [exporters.args.producer.config]
+    [exporters.args.records]
+    defaults = { type = [ "event" ], topic = "zeebe" }
+    deployment = { topic = "zeebe-deployment" }
+    incident = { topic = "zeebe-incident" }
+    jobBatch = { topic = "zeebe-job-batch" }
+    job = { topic = "zeebe-job" }
+    message = { topic = "zeebe-message" }
+    messageSubscription = { topic = "zeebe-message-subscription" }
+    messageStartEventSubscription = { topic = "zeebe-message-subscription-start-event" }
+    raft = { topic = "zeebe-raft" }
+    timer = { topic = "zeebe-timer" }
+    variable = { topic = "zeebe-variable" }
+    workflowInstance = { topic = "zeebe-workflow" }
+    workflowInstanceSubscription = { topic = "zeebe-workflow-subscription" }   
+```
+This example is downloading the exporters Jar from an URL and adding the Jars to the `exporters` directory that will be scanned for jars and added to the zeebe broker classpath. 
+
 ## Dependencies
 
 This chart currently depends on the following charts:
