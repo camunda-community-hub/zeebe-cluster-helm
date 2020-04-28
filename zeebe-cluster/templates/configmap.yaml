@@ -22,7 +22,7 @@ data:
     if [[ -z "${contactPoints}" ]]; then
       for ((i=0; i<${ZEEBE_BROKER_CLUSTER_CLUSTERSIZE}; i++))
       do
-        contactPoints="${contactPoints},${contactPointPrefix}-$i.$(hostname -d):26502"
+        contactPoints="${contactPoints},${contactPointPrefix}-$i.$(hostname -d):{{ .Values.serviceInternalPort }}"
       done
 
       export ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS="${contactPoints}"
