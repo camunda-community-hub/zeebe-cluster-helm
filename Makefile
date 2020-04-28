@@ -13,7 +13,7 @@ setup:
 	helm repo add elastic http://helm.elastic.co
 	helm repo add releases ${CHART_REPO}
 
-build: clean setup
+build: init clean setup
 	helm dependency build zeebe-cluster
 	helm lint zeebe-cluster
 
