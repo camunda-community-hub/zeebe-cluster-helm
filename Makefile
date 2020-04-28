@@ -8,12 +8,12 @@ CHARTMUSEUM_CREDS_PSW := $(shell cat /builder/home/basic-auth-pass.json)
 init:
 	helm init --client-only
 
-setup: 
+setup: init
         helm repo add jenkins-x http://chartmuseum.jenkins-x.io
-	helm repo add elastic http://helm.elastic.co
-	helm repo add releases ${CHART_REPO}
+        helm repo add elastic http://helm.elastic.co
+        helm repo add releases ${CHART_REPO}
 
-build: init clean setup
+build: clean setup
 	helm dependency build zeebe-cluster
 	helm lint zeebe-cluster
 
