@@ -10,6 +10,7 @@ This functionality is in beta and is subject to change. The design and code is l
   * Three Kubernetes nodes to respect the default "hard" affinity settings
   * 1GB of RAM for the JVM heap
 
+
 ## Installing
 
 * Add the official Zeebe helm charts repo
