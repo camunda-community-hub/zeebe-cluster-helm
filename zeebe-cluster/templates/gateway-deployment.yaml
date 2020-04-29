@@ -37,7 +37,7 @@ spec:
             - name: ZEEBE_STANDALONE_GATEWAY
               value: "true"
             - name: ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME
-              value: {{ include "zeebe-cluster.name" . }}  
+              value: {{ tpl .Values.global.zeebe . }}  
             - name: ZEEBE_GATEWAY_CLUSTER_MEMBERID
               valueFrom:
                 fieldRef:
