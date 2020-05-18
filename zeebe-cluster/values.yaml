@@ -25,6 +25,8 @@ env: []
 gateway:
   replicas: 1
   logLevel: warn
+  env: []
+
 
 elasticsearch:
   enabled: true

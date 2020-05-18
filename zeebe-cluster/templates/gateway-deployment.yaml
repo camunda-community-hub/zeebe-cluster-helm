@@ -59,9 +59,12 @@ spec:
             - name: ZEEBE_GATEWAY_MONITORING_HOST
               value: 0.0.0.0   
             - name: ZEEBE_GATEWAY_MONITORING_PORT
-              value: {{  .Values.serviceHttpPort | quote }}              
+              value: {{  .Values.serviceHttpPort | quote }}
+            {{- if .Values.gateway.env }}
+            {{ toYaml .Values.gateway.env | indent 12 | trim }}
+            {{- end }}
           securityContext:
-            {{ toYaml .Values.podSecurityContext | indent 12 | trim }}       
+            {{ toYaml .Values.podSecurityContext | indent 12 | trim }}
           readinessProbe:
             tcpSocket:
               port: {{ default "gateway" .Values.serviceGatewayName  }}

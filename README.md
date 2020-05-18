@@ -54,6 +54,7 @@ This functionality is in beta and is subject to change. The design and code is l
 | `affinity`                 | Use affinity constraints to schedule Zeebe on specific nodes                                                                                                                                | {}  
 | `gateway.replicas`         | The number of standalone gateways that should be deployed | `1`
 | `gateway.logLevel`         | The log level of the gateway, one of: ERROR, WARN, INFO, DEBUG, TRACE | `warn`
+| `gateway.env`         |  Pass additional environment variables to the Zeebe broker pods; <br> variables should be specified using standard Kubernetes raw YAML format. See below for an example.| `[]`
 | `serviceHttpPort`         | The http port used by the brokers and the gateway| `9600`
 | `serviceGatewayPort`         | The gateway port used by the gateway | `26500`
 | `serviceInternalPort`         | The internal port used by the brokers and the gateway | `26502`
