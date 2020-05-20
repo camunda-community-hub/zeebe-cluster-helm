@@ -21,6 +21,10 @@ spec:
         app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+      annotations:
+        {{- range $key, $value := .Values.gateway.podAnnotations }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
     spec:
       containers:
         - name: {{ .Chart.Name }}-gateway
