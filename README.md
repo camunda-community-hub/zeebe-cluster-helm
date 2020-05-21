@@ -45,6 +45,9 @@ This functionality is in beta and is subject to change. The design and code is l
 | `JavaOpts`                 | Set the Zeebe Cluster Broker JavaOpts. This is where you should configure the jvm heap size.                                                                                                                                | `-XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:MaxRAMPercentage=25.0 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:+PrintFlagsFinal`  
 | `resources`                 | Set the Zeebe Cluster Broker Kubernetes Resource Request and Limits                                                                                                                                | `requests:`<br>  `cpu: 500m`<br>  ` memory: 1Gi`<br>`limits:`<br>  ` cpu: 1000m`<br>  ` memory: 2Gi`
 | `env`                       |  Pass additional environment variables to the Zeebe broker pods; <br> variables should be specified using standard Kubernetes raw YAML format. See below for an example.| `[]`
+| `podDisruptionBudget.enabled`         | Create a podDisruptionBudget for the broker pods | `false`
+| `podDisruptionBudget.minAvailable`         | Minimum number of available broker pods for PodDisruptionBudget |
+| `podDisruptionBudget.maxUnavailable`       | Maximum number of unavailable broker pods for PodDisruptionBudget | `1`
 | `pvcSize`                 | Set the Zeebe Cluster Persistence Volume Claim Request storage size                                                                                                                                | `10Gi`  
 | `pvcAccessModes`                 | Set the Zeebe Cluster Persistence Volume Claim Request accessModes                                                                                                                                | `[ "ReadWriteOnce" ]`  
 | `pvcStorageClassName`                 | Set the Zeebe Cluster Persistence Volume Claim Request storageClassName                                                                                                                                | ``  
@@ -56,6 +59,9 @@ This functionality is in beta and is subject to change. The design and code is l
 | `gateway.logLevel`         | The log level of the gateway, one of: ERROR, WARN, INFO, DEBUG, TRACE | `warn`
 | `gateway.env`         |  Pass additional environment variables to the Zeebe broker pods; <br> variables should be specified using standard Kubernetes raw YAML format. See below for an example.| `[]`
 | `gateway.podAnnotations`         | Annotations to be applied to the gateway Deployment pod template | ``
+| `gateway.podDisruptionBudget.enabled`         | Create a PodDisruptionBudget for the gateway pods | `false`
+| `gateway.podDisruptionBudget.minAvailable`         | minimum number of available gateway pods for PodDisruptionBudget | `1`
+| `gateway.podDisruptionBudget.maxUnavailable`       | maximum number of unavailable gateway pods for PodDisruptionBudget |
 | `serviceHttpPort`         | The http port used by the brokers and the gateway| `9600`
 | `serviceGatewayPort`         | The gateway port used by the gateway | `26500`
 | `serviceInternalPort`         | The internal port used by the brokers and the gateway | `26502`
