@@ -36,5 +36,5 @@ data:
     fi
 
     exec /usr/local/zeebe/bin/broker
-  application.yaml: |
+  application.yaml: 
     {{ toYaml .Values.zeebeCfg }}
