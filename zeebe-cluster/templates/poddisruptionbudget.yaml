@@ -1,4 +1,4 @@
-{{- if .Values.podDisruptionBudget.enabled -}}
+{{ if .Values.podDisruptionBudget.enabled }}
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
@@ -15,4 +15,4 @@ spec:
       app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
       app: {{ tpl .Values.global.zeebe . | quote }}
-{{- end }}
+{{ end }}
