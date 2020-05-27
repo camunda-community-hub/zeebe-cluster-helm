@@ -9,14 +9,14 @@ metadata:
   annotations:
       {{- range $key, $value := .Values.annotations }}
       {{ $key }}: {{ $value | quote }}
-      {{- end }}   
+      {{- end }}
 spec:
   replicas: {{ .Values.gateway.replicas  }}
   selector:
     matchLabels:
       app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
   template:
-    metadata:  
+    metadata:
       labels:
         app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
@@ -41,7 +41,7 @@ spec:
             - name: ZEEBE_STANDALONE_GATEWAY
               value: "true"
             - name: ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME
-              value: {{ tpl .Values.global.zeebe . }}  
+              value: {{ tpl .Values.global.zeebe . }}
             - name: ZEEBE_GATEWAY_CLUSTER_MEMBERID
               valueFrom:
                 fieldRef:
@@ -57,11 +57,13 @@ spec:
             - name: ZEEBE_GATEWAY_NETWORK_PORT
               value: {{  .Values.serviceGatewayPort | quote }}
             - name: ZEEBE_GATEWAY_CLUSTER_HOST
-              value: 0.0.0.0
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
             - name: ZEEBE_GATEWAY_CLUSTER_PORT
               value: {{  .Values.serviceInternalPort | quote }}
             - name: ZEEBE_GATEWAY_MONITORING_HOST
-              value: 0.0.0.0   
+              value: 0.0.0.0
             - name: ZEEBE_GATEWAY_MONITORING_PORT
               value: {{  .Values.serviceHttpPort | quote }}
             {{- if .Values.gateway.env }}
