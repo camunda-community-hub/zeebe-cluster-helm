@@ -37,4 +37,6 @@ data:
 
     exec /usr/local/zeebe/bin/broker
   application.yaml: 
-    {{ toYaml .Values.zeebeCfg }}
+{{- with .Values.zeebeCfg }}
+{{ . | toYaml | indent 4 }}
+{{- end }}
