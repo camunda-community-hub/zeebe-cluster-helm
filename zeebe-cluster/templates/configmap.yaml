@@ -36,8 +36,9 @@ data:
     fi
 
     exec /usr/local/zeebe/bin/broker
-  application.yaml: 
-   
-{{- with .Values.zeebeCfg | default "" }}
+{{- if .Values.zeebeCfg }}
+  application.yaml:
+{{- with .Values.zeebeCfg }}
 {{ . | toYaml | indent 4 }}
+{{- end }}
 {{- end }}
