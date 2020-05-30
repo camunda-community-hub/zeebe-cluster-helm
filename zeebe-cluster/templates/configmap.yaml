@@ -41,4 +41,6 @@ data:
 {{- with .Values.zeebeCfg }}
 {{ . | toYaml | indent 4 }}
 {{- end }}
+{{- else }}
+{{ printf "" | indent 4 }} 
 {{- end }}
