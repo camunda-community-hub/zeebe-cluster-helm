@@ -1,0 +1,32 @@
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-kr8rb-7[0m stage [32mfrom-build-pack[0m and container [32mstep-credential-initializer-7vdpk[0m
+{"level":"info","ts":1592227461.7457905,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1592227461.7470503,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-kr8rb-7[0m stage [32mfrom-build-pack[0m and container [32mstep-working-dir-initializer-lnxrk[0m
+{"level":"info","ts":1592227462.9319835,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1592227462.9347491,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-kr8rb-7[0m stage [32mfrom-build-pack[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-kr8rb-7[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-zeebe-io-zeebe-cluster-helm-mas-kr8rb-cdlsb[0m
+{"level":"info","ts":1592227468.9623454,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1592227470.219796,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/zeebe-io/zeebe-cluster-helm.git @ v0.0.120 in path /workspace/source"}
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-kr8rb-7[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:21d49c3b30695cc07aaeb3b19283f49ec4998396
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-kr8rb-7[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-jx-git-credentials[0m
+Generated Git credentials file /builder/home/git/credentials
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-kr8rb-7[0m stage [32mfrom-build-pack[0m and container [32mstep-build-basic-auth-username[0m
+/builder/home/basic-auth-user.json
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-kr8rb-7[0m stage [32mfrom-build-pack[0m and container [32mstep-build-basic-auth-password[0m
+/builder/home/basic-auth-pass.json
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-kr8rb-7[0m stage [32mfrom-build-pack[0m and container [32mstep-build-release[0m
+Makefile:62: *** missing separator (did you mean TAB instead of 8 spaces?).  Stop.
+[31m
+Pipeline failed on stage 'from-build-pack' : container 'step-build-release'. The execution of the pipeline has stopped.[0m
