@@ -8,7 +8,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: zeebe
+      app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
   endpoints:
       - honorLabels: true
         port: http

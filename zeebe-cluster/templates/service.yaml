@@ -5,6 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: broker
     app: {{ tpl .Values.global.zeebe . | quote }}
 {{- toYaml  .Values.labels | nindent 4 }}
   annotations:
@@ -26,4 +27,5 @@ spec:
   selector:
     app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: broker
     app: {{ tpl .Values.global.zeebe . | quote }}

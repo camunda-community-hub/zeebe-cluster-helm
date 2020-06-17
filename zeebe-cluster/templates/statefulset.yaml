@@ -5,6 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: broker
     app: {{ tpl .Values.global.zeebe . | quote }}
 {{- toYaml  .Values.labels | nindent 4 }}
   annotations:
@@ -17,6 +18,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: broker
       app: {{ tpl .Values.global.zeebe . | quote }}
   serviceName: {{ tpl .Values.global.zeebe . | quote }}
   updateStrategy:
@@ -27,6 +29,7 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: broker
         app: {{ tpl .Values.global.zeebe . | quote }}
       annotations:
         {{- range $key, $value := .Values.podAnnotations }}

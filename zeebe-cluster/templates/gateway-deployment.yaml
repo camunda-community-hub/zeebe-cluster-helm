@@ -5,7 +5,8 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+    app.kubernetes.io/component: gateway
+    app: {{ tpl .Values.global.zeebe . | quote }}
   annotations:
       {{- range $key, $value := .Values.annotations }}
       {{ $key }}: {{ $value | quote }}

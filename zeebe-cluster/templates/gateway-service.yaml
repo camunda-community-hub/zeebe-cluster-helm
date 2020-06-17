@@ -5,12 +5,15 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app: {{ tpl .Values.global.zeebe . }}-gateway
+    app: {{ tpl .Values.global.zeebe . | quote }}
   annotations:
 {{- toYaml  .Values.annotations | nindent 4 }}   
 spec:
   selector:
-    app: {{ tpl .Values.global.zeebe . }}-gateway 
+    app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: gateway
+    app: {{ tpl .Values.global.zeebe . | quote }}
   ports:
     - port: {{ .Values.serviceHttpPort }}
       protocol: TCP
