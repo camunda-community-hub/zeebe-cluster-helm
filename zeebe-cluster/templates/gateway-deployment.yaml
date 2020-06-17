@@ -72,7 +72,7 @@ spec:
           volumeMounts:
             {{- if .Values.gateway.log4j2 }}
             - name: config
-              mountPath: /usr/local/zeebe/conf/log4j2.xml
+              mountPath: /usr/local/zeebe/config/log4j2.xml
               subPath: gateway-log4j2.xml
             {{- end }}
           securityContext:
@@ -82,3 +82,8 @@ spec:
               port: {{ default "gateway" .Values.serviceGatewayName  }}
             initialDelaySeconds: 20
             periodSeconds: 5
+      volumes:
+        - name: config
+          configMap:
+            name: {{ tpl .Values.global.zeebe . | quote }}
+            defaultMode: 0744

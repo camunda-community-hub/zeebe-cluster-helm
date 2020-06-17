@@ -106,7 +106,7 @@ spec:
           mountPath: /exporters
         {{- if .Values.log4j2 }}
         - name: config
-          mountPath: /usr/local/zeebe/conf/log4j2.xml
+          mountPath: /usr/local/zeebe/config/log4j2.xml
           subPath: broker-log4j2.xml
         {{- end }}
         securityContext:
