@@ -44,7 +44,7 @@ data:
 {{- end }}
 {{- end }}
   log4j2.xml: |
-{{- if Values.log4j2 }}
+{{- if .Values.log4j2 }}
 {{ .Values.log4j2 | indent 4 | trim }}
 {{- end }}
 
