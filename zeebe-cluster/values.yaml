@@ -21,11 +21,11 @@ ioThreadCount: "2"
 pvcSize: "10Gi"
 pvcAccessModes: [ "ReadWriteOnce" ]
 env: []
-logLevel: warn
+logLevel: info
 
 gateway:
   replicas: 1
-  logLevel: warn
+  logLevel: info
   env: []
   podDisruptionBudget:
     enabled: false
