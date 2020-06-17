@@ -107,7 +107,7 @@ spec:
         {{- if .Values.log4j2 }}
         - name: config
           mountPath: /usr/local/zeebe/conf/log4j2.xml
-          subPath: log4j2.xml
+          subPath: broker-log4j2.xml
         {{- end }}
         securityContext:
           {{ toYaml .Values.podSecurityContext | indent 12 | trim }}
