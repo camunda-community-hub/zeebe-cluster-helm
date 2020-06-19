@@ -2,7 +2,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "zeebe-cluster.name" . }}
+  name: {{ include "zeebe-cluster.fullname" . }}
   labels:
     {{- include "zeebe-cluster.labels" . | nindent 4 }}
     release: metrics

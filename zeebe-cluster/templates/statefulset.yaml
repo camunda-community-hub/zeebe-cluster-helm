@@ -37,7 +37,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
         - name: ZEEBE_BROKER_CLUSTER_CLUSTERNAME
-          value: {{ tpl .Values.global.zeebe . }}    
+          value: {{ tpl .Values.global.zeebe . }}
         - name: ZEEBE_LOG_LEVEL
           value: debug
         - name: ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT
@@ -103,7 +103,7 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: {{ tpl .Values.global.zeebe . | quote }}
+          name: {{ include "zeebe-cluster.fullname" . }}
           defaultMode: 0744
       - name: exporters
         emptyDir: {}    
