@@ -1,13 +1,10 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ tpl .Values.global.zeebe . | quote }}
+  name: {{ include "zeebe-cluster.names.broker" . }}
   labels:
-    app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: broker
-    app: {{ tpl .Values.global.zeebe . | quote }}
-{{- toYaml  .Values.labels | nindent 4 }}
+    {{- include "zeebe-cluster.labels.broker" . | nindent 4 }}
+    {{- toYaml  .Values.labels | nindent 4 }}
   annotations:
     {{- range $key, $value := .Values.annotations }}
     {{ $key }}: {{ $value | quote }}
@@ -16,21 +13,15 @@ spec:
   replicas: {{ .Values.clusterSize  }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
-      app.kubernetes.io/component: broker
-      app: {{ tpl .Values.global.zeebe . | quote }}
-  serviceName: {{ tpl .Values.global.zeebe . | quote }}
+      {{- include "zeebe-cluster.labels.broker" . | nindent 6 }}
+  serviceName: {{ include "zeebe-cluster.names.broker" . }}
   updateStrategy:
     type: RollingUpdate
   podManagementPolicy: Parallel
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/component: broker
-        app: {{ tpl .Values.global.zeebe . | quote }}
+        {{- include "zeebe-cluster.labels.broker" . | nindent 8 }}
       annotations:
         {{- range $key, $value := .Values.podAnnotations }}
         {{ $key }}: {{ $value | quote }}
