@@ -36,8 +36,8 @@ Common labels
 */}}
 {{- define "zeebe-cluster.labels" -}}
 app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
-helm.sh/chart: {{ include "zeebe-cluster.chart" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+helm.sh/chart: {{ include "zeebe-cluster.chart" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -46,4 +46,33 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 
 {{- define "zeebe-cluster.version" -}}
 {{- printf "%s:%s" .Values.image.repository .Values.image.tag -}}
+{{- end -}}
+
+{{- define "zeebe-cluster.labels.broker" -}}
+{{- template "zeebe-cluster.labels" . }}
+app.kubernetes.io/component: broker
+{{- end -}}
+
+{{- define "zeebe-cluster.labels.gateway" -}}
+{{- template "zeebe-cluster.labels" . }}
+app.kubernetes.io/component: gateway
+{{- end -}}
+
+{{/*
+Common names
+*/}}
+{{- define "zeebe-cluster.names.broker" -}}
+{{- if .Values.global.zeebe -}}
+{{- tpl .Values.global.zeebe . | trunc 63 | trimSuffix "-" | quote -}}
+{{- else -}}
+{{- printf "%s-broker" .Release.Name | trunc 63 | trimSuffix "-" | quote -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Creates a valid DNS name for the gateway
+*/}}
+{{- define "zeebe-cluster.names.gateway" -}}
+{{- $name := default .Release.Name (tpl .Values.global.zeebe .) -}}
+{{- printf "%s-gateway" $name | trunc 63 | trimSuffix "-" | quote -}}
 {{- end -}}

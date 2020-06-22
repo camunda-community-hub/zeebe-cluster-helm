@@ -1,11 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+  name: {{ include "zeebe-cluster.names.gateway" . }}
   labels:
-    app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+    {{- include "zeebe-cluster.labels.gateway" . | nindent 4 }}
   annotations:
       {{- range $key, $value := .Values.annotations }}
       {{ $key }}: {{ $value | quote }}
@@ -14,20 +12,18 @@ spec:
   replicas: {{ .Values.gateway.replicas  }}
   selector:
     matchLabels:
-      app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+      {{- include "zeebe-cluster.labels.gateway" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        app: {{ printf "%s-gateway" (tpl .Values.global.zeebe .) | quote }}
+        {{- include "zeebe-cluster.labels.gateway" . | nindent 8 }}
       annotations:
         {{- range $key, $value := .Values.gateway.podAnnotations }}
         {{ $key }}: {{ $value | quote }}
         {{- end }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}-gateway
+        - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
