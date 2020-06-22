@@ -1,0 +1,78 @@
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-pr-9x6rh-3[0m stage [32mfrom-build-pack[0m and container [32mstep-credential-initializer-brd99[0m
+{"level":"info","ts":1592821711.344983,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1592821711.3656292,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-pr-9x6rh-3[0m stage [32mfrom-build-pack[0m and container [32mstep-working-dir-initializer-xwbmc[0m
+{"level":"info","ts":1592821712.9137704,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1592821712.9431589,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-pr-9x6rh-3[0m stage [32mfrom-build-pack[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-pr-9x6rh-3[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-zeebe-io-zeebe-cluster-helm-pr-9x6rh-h4spb[0m
+{"level":"info","ts":1592821717.5479398,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1592821719.3073034,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/zeebe-io/zeebe-cluster-helm.git @ master in path /workspace/source"}
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-pr-9x6rh-3[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:d617da3dbd5289747b0de4604b428f53b6d1a4b3,82:7ebdd0d19ec928abe0dfde80d49ca78cb068eb42
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin --unshallow 7ebdd0d19ec928abe0dfde80d49ca78cb068eb42: d617da3dbd5289747b0de4604b428f53b6d1a4b3:
+DEBUG: ran git fetch --unshallow origin 7ebdd0d19ec928abe0dfde80d49ca78cb068eb42: d617da3dbd5289747b0de4604b428f53b6d1a4b3: in 
+DEBUG: JX_LOG_LEVEL=error LC_ALL=C git branch
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git checkout master
+DEBUG: ran git checkout master in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git reset --hard d617da3dbd5289747b0de4604b428f53b6d1a4b3
+DEBUG: ran git reset --hard d617da3dbd5289747b0de4604b428f53b6d1a4b3 in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git clean -fd .
+DEBUG: ran clean --force -d . in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git merge 7ebdd0d19ec928abe0dfde80d49ca78cb068eb42
+DEBUG: ran git merge 7ebdd0d19ec928abe0dfde80d49ca78cb068eb42 in 
+DEBUG: JX_LOG_LEVEL=error LC_ALL=C git log --format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%s%n%b%x1e d617da3dbd5289747b0de4604b428f53b6d1a4b3..HEAD
+Merged SHA 8878df7dc93fa8a35fb3746e157bb7e2885c8b52 with commit message 'Merge commit '7ebdd0d19ec928abe0dfde80d49ca78cb068eb42'' into base branch master
+Merged SHA 7ebdd0d19ec928abe0dfde80d49ca78cb068eb42 with commit message 'Reduce MaxRAMPercentage to a conservative 25%' into base branch master
+Merged SHA ffc9e156c1b6c8ba72e5a5849abde9e0fe20ed03 with commit message 'Make JVM memory limit dynamic' into base branch master
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-pr-9x6rh-3[0m stage [32mfrom-build-pack[0m and container [32mstep-build-build[0m
+cat: /builder/home/basic-auth-user.json: No such file or directory
+cat: /builder/home/basic-auth-pass.json: No such file or directory
+rm -rf zeebe-cluster/charts
+rm -rf zeebe-cluster/zeebe-cluster*.tgz
+rm -rf zeebe-cluster/requirements.lock
+helm init --client-only
+Creating /builder/home/.helm 
+Creating /builder/home/.helm/repository 
+Creating /builder/home/.helm/repository/cache 
+Creating /builder/home/.helm/repository/local 
+Creating /builder/home/.helm/plugins 
+Creating /builder/home/.helm/starters 
+Creating /builder/home/.helm/cache/archive 
+Creating /builder/home/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /builder/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+Happy Helming!
+helm repo add jenkins-x http://chartmuseum.jenkins-x.io
+"jenkins-x" has been added to your repositories
+helm repo add elastic http://helm.elastic.co
+"elastic" has been added to your repositories
+helm repo add releases http://jenkins-x-chartmuseum:8080
+"releases" has been added to your repositories
+helm dependency build zeebe-cluster
+Hang tight while we grab the latest from your chart repositories...
+...Unable to get an update from the "local" chart repository (http://127.0.0.1:8879/charts):
+	Get http://127.0.0.1:8879/charts/index.yaml: dial tcp 127.0.0.1:8879: connect: connection refused
+...Successfully got an update from the "releases" chart repository
+...Successfully got an update from the "elastic" chart repository
+...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "jenkins-x" chart repository
+Update Complete. ⎈Happy Helming!⎈
+Saving 3 charts
+Downloading elasticsearch from repo http://helm.elastic.co
+Downloading kibana from repo http://helm.elastic.co
+Downloading prometheus-operator from repo https://kubernetes-charts.storage.googleapis.com/
+Deleting outdated charts
+helm lint zeebe-cluster
+==> Linting zeebe-cluster
+Lint OK
+
+1 chart(s) linted, no failures
