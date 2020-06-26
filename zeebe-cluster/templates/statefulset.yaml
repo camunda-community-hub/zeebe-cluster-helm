@@ -51,7 +51,7 @@ spec:
         - name: ZEEBE_BROKER_THREADS_IOTHREADCOUNT
           value: {{ .Values.ioThreadCount  | quote }}
         - name: ZEEBE_BROKER_GATEWAY_ENABLE
-          value: "false"
+          value: {{ .Values.brokerEmbeddedGatewayEnable | default "false" | quote }}
         - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME
           value: "io.zeebe.exporter.ElasticsearchExporter"
         - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_URL
