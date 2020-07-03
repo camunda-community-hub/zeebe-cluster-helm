@@ -39,7 +39,7 @@ spec:
         - name: ZEEBE_BROKER_CLUSTER_CLUSTERNAME
           value: {{ tpl .Values.global.zeebe . }}
         - name: ZEEBE_LOG_LEVEL
-          value: debug
+          value: {{ .Values.global.logLevel | quote }}
         - name: ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT
           value: {{ .Values.partitionCount | quote }}
         - name: ZEEBE_BROKER_CLUSTER_CLUSTERSIZE
@@ -98,6 +98,11 @@ spec:
           mountPath: /usr/local/zeebe/data
         - name: exporters
           mountPath: /exporters
+        {{- if .Values.log4j2 }}
+        - name: config
+          mountPath: /usr/local/zeebe/config/log4j2.xml
+          subPath: broker-log4j2.xml
+        {{- end }}
         securityContext:
           {{ toYaml .Values.podSecurityContext | indent 12 | trim }}
       volumes:

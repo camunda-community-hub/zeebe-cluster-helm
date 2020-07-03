@@ -41,6 +41,9 @@ This functionality is in beta and is subject to change. The design and code is l
 | `cpuThreadCount`                 | Set the Zeebe Cluster CPU thread count                                                                                                                                | `2`   
 | `ioThreadCount`                 | Set the Zeebe Cluster IO thread count                                                                                                                                | `2`  
 | `zeebeCfg`                 | Can be used to set several zeebe configuration options.                                                                                                                                | `null`
+| `logLevel`                 | Sets the log level for io.zeebe packages; must be one of: ERROR, WARN, INFO, DEBUG, TRACE
+| `info`
+| `log4j2`                   | Log4J 2.x XML configuration; if provided, the contents given will be written to file and will overwrite the distribution's default `/usr/local/zeebe/config/log4j2.xml` | ``
 | `gatewayMetrics`                 | Enables the exporting of the gateway prometheus metrics                                                                                                                                | `false`
 | `JavaOpts`                 | Set the Zeebe Cluster Broker JavaOpts. This is where you should configure the jvm heap size.                                                                                                                                | `-XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:MaxRAMPercentage=25.0 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:+PrintFlagsFinal`  
 | `resources`                 | Set the Zeebe Cluster Broker Kubernetes Resource Request and Limits                                                                                                                                | `requests:`<br>  `cpu: 500m`<br>  ` memory: 1Gi`<br>`limits:`<br>  ` cpu: 1000m`<br>  ` memory: 2Gi`
@@ -56,7 +59,8 @@ This functionality is in beta and is subject to change. The design and code is l
 | `tolerations`                 | Tolerations to allow Zeebe to run on dedicated nodes                                                                                                                                | []  
 | `affinity`                 | Use affinity constraints to schedule Zeebe on specific nodes                                                                                                                                | {}  
 | `gateway.replicas`         | The number of standalone gateways that should be deployed | `1`
-| `gateway.logLevel`         | The log level of the gateway, one of: ERROR, WARN, INFO, DEBUG, TRACE | `warn`
+| `gateway.logLevel`         | The log level of the gateway, one of: ERROR, WARN, INFO, DEBUG, TRACE | `info`
+| `gateway.log4j2`           | Log4J 2.x XML configuration; if provided, the contents given will be written to file and will overwrite the distribution's default `/usr/local/zeebe/config/log4j2.xml` | ``
 | `gateway.env`         |  Pass additional environment variables to the Zeebe broker pods; <br> variables should be specified using standard Kubernetes raw YAML format. See below for an example.| `[]`
 | `gateway.podAnnotations`         | Annotations to be applied to the gateway Deployment pod template | ``
 | `gateway.podDisruptionBudget.enabled`         | Create a PodDisruptionBudget for the gateway pods | `false`
