@@ -37,10 +37,6 @@ Common labels
 {{- define "zeebe-cluster.labels" -}}
 app.kubernetes.io/name: {{ include "zeebe-cluster.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-helm.sh/chart: {{ include "zeebe-cluster.chart" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
