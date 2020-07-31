@@ -1,47 +1,47 @@
 
-Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-lz85h-9[0m stage [32mfrom-build-pack[0m and container [32mstep-credential-initializer-fzx2n[0m
-{"level":"info","ts":1592403104.5287628,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
-{"level":"info","ts":1592403104.5306754,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mcredential-initializer[0m
+{"level":"info","ts":1596195862.5141144,"caller":"creds-init/main.go:44","msg":"Credentials initialized."}
 
-Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-lz85h-9[0m stage [32mfrom-build-pack[0m and container [32mstep-working-dir-initializer-v8n4s[0m
-{"level":"info","ts":1592403104.9854474,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
-{"level":"info","ts":1592403104.9864821,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mworking-dir-initializer[0m
 
-Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-lz85h-9[0m stage [32mfrom-build-pack[0m and container [32mstep-place-tools[0m
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mplace-tools[0m
 
-Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-lz85h-9[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-zeebe-io-zeebe-cluster-helm-mas-lz85h-4zgzk[0m
-{"level":"info","ts":1592403109.898051,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
-{"level":"info","ts":1592403111.1173427,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/zeebe-io/zeebe-cluster-helm.git @ v0.0.122 in path /workspace/source"}
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-zeebe-io-zeebe-cluster-helm-mas-t4lns-svbp5[0m
+{"level":"info","ts":1596195898.2903912,"caller":"git/git.go:105","msg":"Successfully cloned https://github.com/zeebe-io/zeebe-cluster-helm.git @ v0.0.141 in path /workspace/source"}
+{"level":"warn","ts":1596195898.3117301,"caller":"git/git.go:152","msg":"Unexpected error: creating symlink: symlink /tekton/home/.ssh /root/.ssh: file exists"}
+{"level":"info","ts":1596195898.4602144,"caller":"git/git.go:133","msg":"Successfully initialized and updated submodules in path /workspace/source"}
 
-Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-lz85h-9[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
-Using SHAs from PULL_REFS=master:4ccd101e5736d22b391cea8a316bbc86ba8e08ad
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-builder-home[0m
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:d515d1f69ab8b40eacb64fe18e8ad9d4e1be0760
 WARNING: no SHAs to merge, falling back to initial cloned commit
 
-Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-lz85h-9[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-jx-git-credentials[0m
-Generated Git credentials file /builder/home/git/credentials
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-jx-git-credentials[0m
+Generated Git credentials file /tekton/home/git/credentials
 
-Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-lz85h-9[0m stage [32mfrom-build-pack[0m and container [32mstep-build-basic-auth-username[0m
-/builder/home/basic-auth-user.json
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mstep-build-basic-auth-username[0m
+/tekton/home/basic-auth-user.json
 
-Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-lz85h-9[0m stage [32mfrom-build-pack[0m and container [32mstep-build-basic-auth-password[0m
-/builder/home/basic-auth-pass.json
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mstep-build-basic-auth-password[0m
+/tekton/home/basic-auth-pass.json
 
-Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-lz85h-9[0m stage [32mfrom-build-pack[0m and container [32mstep-build-release[0m
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mstep-build-release[0m
 rm -rf zeebe-cluster/charts
 rm -rf zeebe-cluster/zeebe-cluster*.tgz
 rm -rf zeebe-cluster/requirements.lock
 helm init --client-only
-Creating /builder/home/.helm 
-Creating /builder/home/.helm/repository 
-Creating /builder/home/.helm/repository/cache 
-Creating /builder/home/.helm/repository/local 
-Creating /builder/home/.helm/plugins 
-Creating /builder/home/.helm/starters 
-Creating /builder/home/.helm/cache/archive 
-Creating /builder/home/.helm/repository/repositories.yaml 
+Creating /tekton/home/.helm 
+Creating /tekton/home/.helm/repository 
+Creating /tekton/home/.helm/repository/cache 
+Creating /tekton/home/.helm/repository/local 
+Creating /tekton/home/.helm/plugins 
+Creating /tekton/home/.helm/starters 
+Creating /tekton/home/.helm/cache/archive 
+Creating /tekton/home/.helm/repository/repositories.yaml 
 Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
 Adding local repo with URL: http://127.0.0.1:8879/charts 
-$HELM_HOME has been configured at /builder/home/.helm.
+$HELM_HOME has been configured at /tekton/home/.helm.
 Not installing Tiller due to 'client-only' flag having been set
 Happy Helming!
 helm repo add jenkins-x http://chartmuseum.jenkins-x.io
@@ -69,16 +69,16 @@ helm lint zeebe-cluster
 Lint OK
 
 1 chart(s) linted, no failures
-sed -i -e "s/version:.*/version: 0.0.122/" zeebe-cluster/Chart.yaml
+sed -i -e "s/version:.*/version: 0.0.141/" zeebe-cluster/Chart.yaml
 helm package zeebe-cluster
-Successfully packaged chart and saved it to: /workspace/source/zeebe-cluster-0.0.122.tgz
-curl --fail -u *****:*********** --data-binary "@zeebe-cluster-0.0.122.tgz" http://jenkins-x-chartmuseum:8080/api/charts
+Successfully packaged chart and saved it to: /workspace/source/zeebe-cluster-0.0.141.tgz
+curl --fail -u *****:*********** --data-binary "@zeebe-cluster-0.0.141.tgz" http://jenkins-x-chartmuseum:8080/api/charts
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  273k  100    14  100  273k    128  2517k --:--:-- --:--:-- --:--:-- 2531k
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  273k  100    14  100  273k    156  3051k --:--:-- --:--:-- --:--:-- 3074k
 {"saved":true}rm -rf zeebe-cluster*.tgz
 
-Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-lz85h-9[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-step6[0m
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-t4lns-9[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-step6[0m
 Using https://github.com/zeebe-io/zeebe-cluster-helm as source for change discovered from git repo in /workspace/source
-Created Pull Request: https://github.com/zeebe-io/zeebe-full-helm/pull/73
-Added label updatebot to Pull Request https://github.com/zeebe-io/zeebe-full-helm/pull/73
+Created Pull Request: https://github.com/zeebe-io/zeebe-full-helm/pull/83
+Added label updatebot to Pull Request https://github.com/zeebe-io/zeebe-full-helm/pull/83
