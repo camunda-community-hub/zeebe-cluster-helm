@@ -25,6 +25,7 @@ logLevel: info
 
 gateway:
   replicas: 1
+  podLabels: {}
   logLevel: info
   env: []
   podDisruptionBudget:
@@ -54,6 +55,7 @@ JavaOpts: >-
 
 labels:
   app: zeebe    
+podLabels: {}
 serviceType: ClusterIP
 serviceHttpPort: 9600
 serviceGatewayPort: 26500    

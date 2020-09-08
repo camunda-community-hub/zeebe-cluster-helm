@@ -17,6 +17,9 @@ spec:
     metadata:
       labels:
         {{- include "zeebe-cluster.labels.gateway" . | nindent 8 }}
+        {{- if .Values.gateway.podLabels }}
+        {{- toYaml .Values.gateway.podLabels | nindent 8 }}
+        {{- end }}
       annotations:
         {{- range $key, $value := .Values.gateway.podAnnotations }}
         {{ $key }}: {{ $value | quote }}
