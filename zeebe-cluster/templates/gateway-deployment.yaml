@@ -78,6 +78,10 @@ spec:
               port: {{ default "gateway" .Values.serviceGatewayName  }}
             initialDelaySeconds: 20
             periodSeconds: 5
+          {{- if .Values.gateway.resources}}
+          resources:
+            {{- toYaml .Values.gateway.resources | nindent 12 }}
+          {{- end }}
       volumes:
         - name: config
           configMap:
