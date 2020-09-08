@@ -4,6 +4,7 @@
 
 global: 
   elasticsearch:
+    exporter: true
     host: "elasticsearch-master"
     port: 9200 
   zeebe: "{{ .Release.Name }}-zeebe"
