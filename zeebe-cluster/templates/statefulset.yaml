@@ -69,11 +69,12 @@ spec:
         - name: JAVA_TOOL_OPTIONS
           value: {{ .Values.JavaOpts | quote }}
           
-        {{- if .Values.env }}
-          {{- range $key, $value := .Values.env }}
-            {{ $key }} : {{ tpl ($value | toString) $ }}
-          {{- end }}
+      {{- if .Values.env }}
+        {{- range $key, $value := .Values.env }}
+        - name: {{ $key }}
+          value: {{ tpl ($value | toString) $ }}
         {{- end }}
+      {{- end }}
         ports:
         - containerPort: {{ .Values.serviceHttpPort  }}
           name: {{ default "http" .Values.serviceHttpName  }}
