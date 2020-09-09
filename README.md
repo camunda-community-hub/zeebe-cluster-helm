@@ -45,11 +45,7 @@ This functionality is in beta and is subject to change. The design and code is l
 | `info`
 | `log4j2`                   | Log4J 2.x XML configuration; if provided, the contents given will be written to file and will overwrite the distribution's default `/usr/local/zeebe/config/log4j2.xml` | ``
 | `gatewayMetrics`                 | Enables the exporting of the gateway prometheus metrics                                                                                                                                | `false`
-| `JavaOpts`                 | Set the Zeebe Cluster Broker JavaOpts. This is where you should configure the jvm heap size.                                                                                                                                | `-XX:MaxRAMPercentage=25.0
-  -XX:+HeapDumpOnOutOfMemoryError
-  -XX:HeapDumpPath=/usr/local/zeebe/data
-  -XX:ErrorFile=/usr/local/zeebe/data/zeebe_error%p.log
-  -XX:+ExitOnOutOfMemoryError`  
+| `JavaOpts`                 | Set the Zeebe Cluster Broker JavaOpts. This is where you should configure the jvm heap size.                                                                                                                                | `-XX:MaxRAMPercentage=25.0 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/usr/local/zeebe/data -XX:ErrorFile=/usr/local/zeebe/data/zeebe_error%p.log -XX:+ExitOnOutOfMemoryError`  
 | `resources`                 | Set the Zeebe Cluster Broker Kubernetes Resource Request and Limits                                                                                                                                | `requests:`<br>  `cpu: 500m`<br>  ` memory: 1Gi`<br>`limits:`<br>  ` cpu: 1000m`<br>  ` memory: 2Gi`
 | `env`                       |  Pass additional environment variables to the Zeebe broker pods; <br> variables should be specified using standard Kubernetes raw YAML format. See below for an example.| `[]`
 | `podDisruptionBudget.enabled`         | Create a podDisruptionBudget for the broker pods | `false`
@@ -110,70 +106,12 @@ extraInitContainers: |
     volumeMounts:
     - name: exporters
       mountPath: /exporters/    
-zeebeCfg: |- 
-  [[exporters]]
-  id = "elasticsearch"
-  className = "io.zeebe.exporter.ElasticsearchExporter"
-    [exporters.args]
-    url = "http://elasticsearch-master:9200"
-    [exporters.args.bulk]
-    delay = 5
-    size = 1_000
-    #[exporters.args.authentication]
-    #username = elastic
-    #password = changeme
-    [exporters.args.index]
-    prefix = "zeebe-record"
-    createTemplate = true
-    command = false
-    event = true
-    rejection = false
-    deployment = true
-    incident = true
-    job = true
-    message = false
-    messageSubscription = false
-    raft = false
-    workflowInstance = true
-    workflowInstanceSubscription = false
-  
-  [[exporters]]
-  id = "hazelcast"
-  className = "io.zeebe.hazelcast.exporter.HazelcastExporter"
-    [exporters.args]
-    enabledValueTypes = "JOB,WORKFLOW_INSTANCE,DEPLOYMENT,INCIDENT,TIMER,VARIABLE,MESSAGE,MESSAGE_SUBSCRIPTION,MESSAGE_START_EVENT_SUBSCRIPTION"
-    updatePosition = false
-  
-  [[exporters]]
-  id = "kafka"
-  className = "io.zeebe.exporters.kafka.KafkaExporter"
-    [exporters.args]
-    maxInFlightRecords = 1000
-    inFlightRecordCheckIntervalMs = 1000
-    
-    [exporters.args.producer]
-    servers = [ "my-kafka:9092" ]
-    requestTimeoutMs = 5000
-    closeTimeoutMs = 5000
-    clientId = "zeebe"    
-    maxConcurrentRequests = 3
-    [exporters.args.producer.config]
-    [exporters.args.records]
-    defaults = { type = [ "event" ], topic = "zeebe" }
-    deployment = { topic = "zeebe-deployment" }
-    incident = { topic = "zeebe-incident" }
-    jobBatch = { topic = "zeebe-job-batch" }
-    job = { topic = "zeebe-job" }
-    message = { topic = "zeebe-message" }
-    messageSubscription = { topic = "zeebe-message-subscription" }
-    messageStartEventSubscription = { topic = "zeebe-message-subscription-start-event" }
-    raft = { topic = "zeebe-raft" }
-    timer = { topic = "zeebe-timer" }
-    variable = { topic = "zeebe-variable" }
-    workflowInstance = { topic = "zeebe-workflow" }
-    workflowInstanceSubscription = { topic = "zeebe-workflow-subscription" }   
+env:
+  ZEEBE_BROKER_EXPORTERS_HAZELCAST_JARPATH: exporters/zeebe-hazelcast-exporter.jar
+  ZEEBE_BROKER_EXPORTERS_HAZELCAST_CLASSNAME: io.zeebe.hazelcast.exporter.HazelcastExporter
+  ZEEBE_HAZELCAST_REMOTE_ADDRESS: "{{ .Release.Name }}-hazelcast"  
 ```
-This example is downloading the exporters Jar from an URL and adding the Jars to the `exporters` directory that will be scanned for jars and added to the zeebe broker classpath. 
+This example is downloading the exporters Jar from an URL and adding the Jars to the `exporters` directory that will be scanned for jars and added to the zeebe broker classpath. Then with `environment variables` you can configure the exporter parameters. 
 
 ## Dependencies
 
