@@ -45,7 +45,11 @@ This functionality is in beta and is subject to change. The design and code is l
 | `info`
 | `log4j2`                   | Log4J 2.x XML configuration; if provided, the contents given will be written to file and will overwrite the distribution's default `/usr/local/zeebe/config/log4j2.xml` | ``
 | `gatewayMetrics`                 | Enables the exporting of the gateway prometheus metrics                                                                                                                                | `false`
-| `JavaOpts`                 | Set the Zeebe Cluster Broker JavaOpts. This is where you should configure the jvm heap size.                                                                                                                                | `-XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:MaxRAMPercentage=25.0 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:+PrintFlagsFinal`  
+| `JavaOpts`                 | Set the Zeebe Cluster Broker JavaOpts. This is where you should configure the jvm heap size.                                                                                                                                | `-XX:MaxRAMPercentage=25.0
+  -XX:+HeapDumpOnOutOfMemoryError
+  -XX:HeapDumpPath=/usr/local/zeebe/data
+  -XX:ErrorFile=/usr/local/zeebe/data/zeebe_error%p.log
+  -XX:+ExitOnOutOfMemoryError`  
 | `resources`                 | Set the Zeebe Cluster Broker Kubernetes Resource Request and Limits                                                                                                                                | `requests:`<br>  `cpu: 500m`<br>  ` memory: 1Gi`<br>`limits:`<br>  ` cpu: 1000m`<br>  ` memory: 2Gi`
 | `env`                       |  Pass additional environment variables to the Zeebe broker pods; <br> variables should be specified using standard Kubernetes raw YAML format. See below for an example.| `[]`
 | `podDisruptionBudget.enabled`         | Create a podDisruptionBudget for the broker pods | `false`
