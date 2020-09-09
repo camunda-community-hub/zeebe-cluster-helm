@@ -68,8 +68,11 @@ spec:
               fieldPath: metadata.name              
         - name: JAVA_TOOL_OPTIONS
           value: {{ .Values.JavaOpts | quote }}
+          
         {{- if .Values.env }}
-        {{ toYaml .Values.env | indent 8 | trim }}
+          {{- range $key, $value := .Values.env }}
+            {{ $key }} : {{ tpl ($value | toString) $ }}
+          {{- end }}
         {{- end }}
         ports:
         - containerPort: {{ .Values.serviceHttpPort  }}
