@@ -39,7 +39,7 @@ spec:
         - name: ZEEBE_BROKER_CLUSTER_CLUSTERNAME
           value: {{ tpl .Values.global.zeebe . }}
         - name: ZEEBE_LOG_LEVEL
-          value: {{ .Values.global.logLevel | quote }}
+          value: {{ .Values.logLevel | quote }}
         - name: ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT
           value: {{ .Values.partitionCount | quote }}
         - name: ZEEBE_BROKER_CLUSTER_CLUSTERSIZE
