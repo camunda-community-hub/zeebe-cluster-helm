@@ -1,0 +1,84 @@
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mcredential-initializer[0m
+{"level":"info","ts":1599832967.7697148,"caller":"creds-init/main.go:44","msg":"Credentials initialized."}
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mworking-dir-initializer[0m
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mplace-tools[0m
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-zeebe-io-zeebe-cluster-helm-mas-nww6v-gw76d[0m
+{"level":"info","ts":1599832977.0529053,"caller":"git/git.go:105","msg":"Successfully cloned https://github.com/zeebe-io/zeebe-cluster-helm.git @ v0.0.148 in path /workspace/source"}
+{"level":"warn","ts":1599832977.0550263,"caller":"git/git.go:152","msg":"Unexpected error: creating symlink: symlink /tekton/home/.ssh /root/.ssh: file exists"}
+{"level":"info","ts":1599832977.3314936,"caller":"git/git.go:133","msg":"Successfully initialized and updated submodules in path /workspace/source"}
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-builder-home[0m
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:71d79d2b1a646cadff6a54dda69a16ef32a91fee
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-jx-git-credentials[0m
+Generated Git credentials file /tekton/home/git/credentials
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mstep-build-basic-auth-username[0m
+/tekton/home/basic-auth-user.json
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mstep-build-basic-auth-password[0m
+/tekton/home/basic-auth-pass.json
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mstep-build-release[0m
+rm -rf zeebe-cluster/charts
+rm -rf zeebe-cluster/zeebe-cluster*.tgz
+rm -rf zeebe-cluster/requirements.lock
+helm init --client-only
+Creating /tekton/home/.helm 
+Creating /tekton/home/.helm/repository 
+Creating /tekton/home/.helm/repository/cache 
+Creating /tekton/home/.helm/repository/local 
+Creating /tekton/home/.helm/plugins 
+Creating /tekton/home/.helm/starters 
+Creating /tekton/home/.helm/cache/archive 
+Creating /tekton/home/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /tekton/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+Happy Helming!
+helm repo add jenkins-x http://chartmuseum.jenkins-x.io
+"jenkins-x" has been added to your repositories
+helm repo add elastic http://helm.elastic.co
+"elastic" has been added to your repositories
+helm repo add releases http://jenkins-x-chartmuseum:8080
+"releases" has been added to your repositories
+helm dependency build zeebe-cluster
+Hang tight while we grab the latest from your chart repositories...
+...Unable to get an update from the "local" chart repository (http://127.0.0.1:8879/charts):
+	Get http://127.0.0.1:8879/charts/index.yaml: dial tcp 127.0.0.1:8879: connect: connection refused
+...Successfully got an update from the "releases" chart repository
+...Successfully got an update from the "elastic" chart repository
+...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "jenkins-x" chart repository
+Update Complete. ⎈Happy Helming!⎈
+Saving 3 charts
+Downloading elasticsearch from repo http://helm.elastic.co
+Downloading kibana from repo http://helm.elastic.co
+Downloading prometheus-operator from repo https://kubernetes-charts.storage.googleapis.com/
+Deleting outdated charts
+helm lint zeebe-cluster
+==> Linting zeebe-cluster
+Lint OK
+
+1 chart(s) linted, no failures
+sed -i -e "s/version:.*/version: 0.0.148/" zeebe-cluster/Chart.yaml
+helm package zeebe-cluster
+Successfully packaged chart and saved it to: /workspace/source/zeebe-cluster-0.0.148.tgz
+curl --fail -u *****:*********** --data-binary "@zeebe-cluster-0.0.148.tgz" http://jenkins-x-chartmuseum:8080/api/charts
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  273k  100    14  100  273k    126  2464k --:--:-- --:--:-- --:--:-- 2488k
+{"saved":true}rm -rf zeebe-cluster*.tgz
+
+Showing logs for build [32mzeebe-io-zeebe-cluster-helm-mas-nww6v-16[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-step6[0m
+Using https://github.com/zeebe-io/zeebe-cluster-helm as source for change discovered from git repo in /workspace/source
+Created Pull Request: https://github.com/zeebe-io/zeebe-full-helm/pull/92
+Added label updatebot to Pull Request https://github.com/zeebe-io/zeebe-full-helm/pull/92
