@@ -87,3 +87,15 @@ spec:
           configMap:
             name: {{ include "zeebe-cluster.fullname" . }}
             defaultMode: 0744
+{{- with .Values.gateway.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.gateway.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.gateway.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+{{- end }}
