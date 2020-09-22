@@ -22,6 +22,9 @@ spec:
     metadata:
       labels:
         {{- include "zeebe-cluster.labels.broker" . | nindent 8 }}
+        {{- if .Values.podLabels }}
+        {{- toYaml .Values.podLabels | nindent 8 }}
+        {{- end }}
       annotations:
         {{- range $key, $value := .Values.podAnnotations }}
         {{ $key }}: {{ $value | quote }}
