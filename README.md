@@ -1,6 +1,6 @@
 # Zeebe Cluster Helm Chart
 
-This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.
+This functionality is in beta and is subject to change. The design and code are less mature than official GA features and is provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.
 
 ## Requirements
 
@@ -120,7 +120,7 @@ This chart currently depends on the following charts:
 * [Kibana Helm Chart](https://github.com/elastic/helm-charts/tree/master/kibana)
 * [Prometheus Operator Helm Chart](https://github.com/helm/charts/tree/master/stable/prometheus-operator)
 
-These dependencies can be turned on or off and parameters can be overriden from these dependent charts by changing the `values.yaml` file. For example:
+These dependencies can be turned on or off and parameters can be overridden from these dependent charts by changing the `values.yaml` file. For example:
 
 ```yaml
 elasticsearch:
