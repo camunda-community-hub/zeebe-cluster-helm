@@ -4,7 +4,7 @@ This functionality is in beta and is subject to change. The design and code is l
 
 ## Requirements
 
-* [Helm](https://helm.sh/) >= 2.8.0
+* [Helm](https://helm.sh/) >= 3.x
 * Kubernetes >= 1.8
 * Minimum cluster requirements include the following to run this chart with default settings. All of these settings are configurable.
   * Three Kubernetes nodes to respect the default "hard" affinity settings
