@@ -43,7 +43,7 @@ spec:
             if [ -d "/workspace/source/charts/$REPO_NAME" ]; then
             sed -i -e "s/^version:.*/version: $VERSION/" ./charts/$REPO_NAME/Chart.yaml
             sed -i -e "s/repository:.*/repository: $DOCKER_REGISTRY\/$DOCKER_REGISTRY_ORG\/$APP_NAME/" ./charts/$REPO_NAME/values.yaml
-            sed -i -e "s/tag:.*/tag: $VERSION/" ./charts/$REPO_NAME/values.yaml;
+            sed -i -e "s/^tag:.*/tag: $VERSION/" ./charts/$REPO_NAME/values.yaml;
             else echo no charts; fi
 
             git commit -a -m "release $VERSION" --allow-empty
@@ -56,7 +56,6 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            jx gitops helm release -h
             jx gitops helm release
         - image: gcr.io/jenkinsxio/jx-promote:0.0.145
           name: promote-jx-promote
