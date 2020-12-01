@@ -65,6 +65,8 @@ spec:
             helm search repo prometheus
             ls -al charts/zeebe-cluster-helm/
             helm repo list
+            cat charts/zeebe-cluster-helm/Chart.yaml
+            helm lint charts/zeebe-cluster-helm/
             echo "about to do helm dependency build"
             helm dependency build charts/zeebe-cluster-helm/
             echo "after helm dependency build"
