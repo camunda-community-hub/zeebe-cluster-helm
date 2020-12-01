@@ -57,6 +57,8 @@ spec:
           script: |
             #!/usr/bin/env sh
             helm repo add elastic http://helm.elastic.co
+            helm repo update
+            echo "adding elastic by hand"
             jx gitops helm release
         - image: gcr.io/jenkinsxio/jx-promote:0.0.145
           name: promote-jx-promote
