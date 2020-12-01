@@ -58,8 +58,12 @@ spec:
             #!/usr/bin/env sh
             helm repo add elastic https://helm.elastic.co
             helm repo add prometheus https://prometheus-community.github.io/helm-charts
+            helm repo update
+            helm search repo elasticsearch
+            helm search repo kibana
+            helm search repo prometheus
             helm dependency build charts/zeebe-cluster-helm/
-            jx gitops helm release --no-release
+            #jx gitops helm release --no-release
         - image: gcr.io/jenkinsxio/jx-promote:0.0.145
           name: promote-jx-promote
           resources: {}
