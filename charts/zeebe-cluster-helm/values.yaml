@@ -9,8 +9,8 @@ global:
   zeebe: "{{ .Release.Name }}-zeebe"
 
 image:
-  repository: camunda/zeebe
-  tag: 0.25.0
+  repository: gcr.io/camunda-researchanddevelopment/zeebe-cluster-helm
+  tag: 0.0.186
   pullPolicy: IfNotPresent
 
 clusterSize: "3"
