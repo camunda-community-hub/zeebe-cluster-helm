@@ -64,6 +64,7 @@ spec:
             helm search repo kibana
             helm search repo prometheus
             ls -al charts/zeebe-cluster-helm/
+            helm repo list
             echo "about to do helm dependency build"
             helm dependency build charts/zeebe-cluster-helm/
             echo "after helm dependency build"
