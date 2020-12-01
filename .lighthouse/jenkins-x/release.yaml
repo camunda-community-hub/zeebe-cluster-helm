@@ -56,8 +56,8 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            cat charts/zeebe-cluster-helm/Chart.yaml
-            jx gitops helm release --no-release
+            jx gitops helm release -h
+            jx gitops helm release
         - image: gcr.io/jenkinsxio/jx-promote:0.0.145
           name: promote-jx-promote
           resources: {}
