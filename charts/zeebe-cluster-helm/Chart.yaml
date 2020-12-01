@@ -6,15 +6,15 @@ type: application
 version: 0.1.0-SNAPSHOT
 icon: https://zeebe.io/img/zeebe-logo.png
 dependencies:
-- name: elastic/elasticsearch
+- name: elasticsearch
   repository: "https://helm.elastic.co"
   version: 7.10.0
   condition: "elasticsearch.enabled"
-- name: elastickibana
+- name: kibana
   repository: "https://helm.elastic.co" 
   version: 7.10.0
   condition: "kibana.enabled"
-- name: prometheus/prometheus
+- name: prometheus
   repository: "https://prometheus-community.github.io/helm-charts"
   version: 12.0.1
   condition: "prometheus.enabled"
