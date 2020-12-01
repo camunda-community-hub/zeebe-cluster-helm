@@ -41,7 +41,7 @@ spec:
             source /workspace/source/.jx/variables.sh
 
             if [ -d "/workspace/source/charts/$REPO_NAME" ]; then
-            sed -i -e "s/version:.*/version: $VERSION/" ./charts/$REPO_NAME/Chart.yaml
+            sed -i -e "s/version:./version: $VERSION/" ./charts/$REPO_NAME/Chart.yaml
             sed -i -e "s/repository:.*/repository: $DOCKER_REGISTRY\/$DOCKER_REGISTRY_ORG\/$APP_NAME/" ./charts/$REPO_NAME/values.yaml
             sed -i -e "s/tag:.*/tag: $VERSION/" ./charts/$REPO_NAME/values.yaml;
             else echo no charts; fi
@@ -56,23 +56,8 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            helm version
-            helm repo add elastic https://helm.elastic.co
-            helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-            helm repo update
-            helm search repo elasticsearch
-            helm search repo kibana
-            helm search repo prometheus
-            ls -al charts/zeebe-cluster-helm/
-            helm repo list
             cat charts/zeebe-cluster-helm/Chart.yaml
-            helm lint charts/zeebe-cluster-helm/
-            echo "about to do helm dependency build"
-            helm dependency build charts/zeebe-cluster-helm/
-            echo "after helm dependency build"
-            ls -al charts/zeebe-cluster-helm/
-
-            #jx gitops helm release --no-release
+            jx gitops helm release --no-release
         - image: gcr.io/jenkinsxio/jx-promote:0.0.145
           name: promote-jx-promote
           resources: {}
