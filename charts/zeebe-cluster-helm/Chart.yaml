@@ -18,6 +18,6 @@ dependencies:
   repository: "https://prometheus-community.github.io/helm-charts"
   version: ~12.0.1
   condition: "prometheus.enabled"
-- name: jx3/jenkins-x-crds
+- name: jenkins-x-crds
   repository: "https://storage.googleapis.com/jenkinsxio/charts"
   version: 3.0.5
