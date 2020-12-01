@@ -56,6 +56,7 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
+            helm dependency build .
             jx gitops helm release --no-release
         - image: gcr.io/jenkinsxio/jx-promote:0.0.145
           name: promote-jx-promote
