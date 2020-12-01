@@ -56,10 +56,7 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            ls -al 
-            cd charts/
-            ls -al
-            helm dependency build zeebe-cluster-helm/
+            helm dependency build charts/zeebe-cluster-helm/
             jx gitops helm release --no-release
         - image: gcr.io/jenkinsxio/jx-promote:0.0.145
           name: promote-jx-promote
