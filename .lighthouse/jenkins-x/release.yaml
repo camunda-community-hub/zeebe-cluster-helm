@@ -57,7 +57,7 @@ spec:
           script: |
             #!/usr/bin/env sh
             ls -al 
-            cd /charts/
+            cd charts/
             ls -al
             helm dependency build zeebe-cluster-helm/
             jx gitops helm release --no-release
