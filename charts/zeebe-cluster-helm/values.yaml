@@ -9,7 +9,7 @@ global:
   zeebe: "{{ .Release.Name }}-zeebe"
 
 image:
-  repository: camunda/zeebe
+  repository: gcr.io/camunda-researchanddevelopment/zeebe-cluster-helm
   tag: 0.25.0
   pullPolicy: IfNotPresent
 
