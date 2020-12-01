@@ -64,6 +64,7 @@ spec:
             helm search repo kibana
             helm search repo prometheus
             helm dependency build charts/zeebe-cluster-helm/
+            
             #jx gitops helm release --no-release
         - image: gcr.io/jenkinsxio/jx-promote:0.0.145
           name: promote-jx-promote
