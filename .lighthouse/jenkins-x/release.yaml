@@ -56,10 +56,9 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            helm --version
+            jx gitops helm release
             helm repo list
             helm search repo elasticsearch
-            jx gitops helm release
         - image: gcr.io/jenkinsxio/jx-promote:0.0.145
           name: promote-jx-promote
           resources: {}
