@@ -64,7 +64,10 @@ spec:
             helm search repo kibana
             helm search repo prometheus
             ls -al charts/zeebe-cluster-helm/
+            echo "about to do helm dependency build"
             helm dependency build charts/zeebe-cluster-helm/
+            echo "after helm dependency build"
+            ls -al charts/zeebe-cluster-helm/
 
             #jx gitops helm release --no-release
         - image: gcr.io/jenkinsxio/jx-promote:0.0.145
