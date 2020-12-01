@@ -58,7 +58,7 @@ spec:
             #!/usr/bin/env sh
             helm version
             helm repo add elastic https://helm.elastic.co
-            helm repo add prometheus https://prometheus-community.github.io/helm-charts
+            helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
             helm repo update
             helm search repo elasticsearch
             helm search repo kibana
