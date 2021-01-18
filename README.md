@@ -22,7 +22,7 @@ This functionality is in beta and is subject to change. The design and code is l
 * Install it
 
   ```shell
-  helm install --name zeebe-cluster zeebe/zeebe-cluster-helm
+  helm install --name zeebe-cluster-helm zeebe/zeebe-cluster-helm
   ```
 
  ## Configuration
