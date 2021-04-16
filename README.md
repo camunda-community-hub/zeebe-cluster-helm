@@ -16,7 +16,7 @@ This functionality is in beta and is subject to change. The design and code is l
 * Add the official Zeebe helm charts repo
 
   ```shell
-  helm repo add zeebe https://helm.zeebe.io
+  helm repo add zeebe https://helm.camunda.io
   ```
 
 * Install it
