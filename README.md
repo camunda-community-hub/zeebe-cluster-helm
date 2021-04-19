@@ -5,7 +5,7 @@ This functionality is in beta and is subject to change. The design and code is l
 ## Requirements
 
 * [Helm](https://helm.sh/) >= 3.x + 
-* Kubernetes >= 1.17+
+* Kubernetes >= 1.18+
 * Minimum cluster requirements include the following to run this chart with default settings. All of these settings are configurable.
   * Three Kubernetes nodes to respect the default "hard" affinity settings
   * 1GB of RAM for the JVM heap
@@ -22,7 +22,7 @@ This functionality is in beta and is subject to change. The design and code is l
 * Install it
 
   ```shell
-  helm install --name zeebe-cluster-helm zeebe/zeebe-cluster-helm
+  helm install zb zeebe/zeebe-cluster-helm
   ```
 
  ## Configuration
