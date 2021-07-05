@@ -60,6 +60,7 @@ This functionality is in beta and is subject to change. The design and code is l
 | `nodeSelector`                 | Node selection constraint to schedule Zeebe on specific nodes                                                                                                                                | {}  
 | `tolerations`                 | Tolerations to allow Zeebe to run on dedicated nodes                                                                                                                                | []  
 | `affinity`                 | Use affinity constraints to schedule Zeebe on specific nodes                                                                                                                                | {}  
+| `securityContext`                 | Set security context to run as non root                                                                                                                                 | {}  
 | `gateway.replicas`         | The number of standalone gateways that should be deployed | `1`
 | `gateway.logLevel`         | The log level of the gateway, one of: ERROR, WARN, INFO, DEBUG, TRACE | `info` 
 | `gateway.log4j2`           | Log4J 2.x XML configuration; if provided, the contents given will be written to file and will overwrite the distribution's default `/usr/local/zeebe/config/log4j2.xml` | ``
