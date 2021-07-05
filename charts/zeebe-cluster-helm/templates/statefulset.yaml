@@ -102,7 +102,7 @@ spec:
         - name: config
           mountPath: /usr/local/zeebe/config/application.yaml
           subPath: application.yaml
-        - name: config
+        - name: scripts
           mountPath: /usr/local/bin/startup.sh
           subPath: startup.sh
         - name: data
@@ -120,7 +120,11 @@ spec:
       - name: config
         configMap:
           name: {{ include "zeebe-cluster.fullname" . }}
-          defaultMode: 0744
+          defaultMode: 0440
+      - name: scripts
+        configMap:
+          name: {{ include "zeebe-cluster.fullname" . }}
+          defaultMode: 0770
       - name: exporters
         emptyDir: {}    
 {{- with .Values.nodeSelector }}
@@ -133,6 +137,10 @@ spec:
 {{- end }}
 {{- with .Values.tolerations }}
       tolerations:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.securityContext }}
+      securityContext:
 {{ toYaml . | indent 8 }}
 {{- end }}
   volumeClaimTemplates:
