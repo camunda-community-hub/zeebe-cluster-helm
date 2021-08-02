@@ -35,11 +35,11 @@ gateway:
 
 elasticsearch:
   enabled: true
-  imageTag: 7.10.1
+  imageTag: 7.12.1
 
 kibana:
   enabled: false
-  imageTag: 7.10.1
+  imageTag: 7.12.1
 
 prometheus:
   enabled: false
