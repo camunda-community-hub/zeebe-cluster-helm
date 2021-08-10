@@ -132,3 +132,36 @@ elasticsearch:
 kibana:
   enabled: false
 ```
+
+## Development
+
+For development purpose you might want to deploy and test the charts without creating a new release. In order to do this you can run the following:
+
+```sh
+ helm install <RELEASENAME> charts/zeebe-cluster-helm/
+```
+
+If you see errors like:
+
+```sh
+Error: found in Chart.yaml, but missing in charts/ directory: elasticsearch, kibana, kube-prometheus-stack
+```
+
+Then you need to download the depenencies first. You can do this via:
+
+```sh
+$ helm dependency update charts/zeebe-cluster-helm/
+Getting updates for unmanaged Helm repositories...
+...Successfully got an update from the "https://helm.elastic.co" chart repository
+...Successfully got an update from the "https://helm.elastic.co" chart repository
+...Successfully got an update from the "https://prometheus-community.github.io/helm-charts" chart repository
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "zeebe" chart repository
+...Successfully got an update from the "stable" chart repository
+Update Complete. ⎈Happy Helming!⎈
+Saving 3 charts
+Downloading elasticsearch from repo https://helm.elastic.co
+Downloading kibana from repo https://helm.elastic.co
+Downloading kube-prometheus-stack from repo https://prometheus-community.github.io/helm-charts
+Deleting outdated charts
+```
